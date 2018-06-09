@@ -8,8 +8,8 @@ from todos import models
 class TodoModelTestsCase(TestCase):
     def setUp(self):
         self.user = mommy.make('User')
-        self.todo = models.Todo.objects.create(
-            name='todo_test', user=self.user
+        self.todo = mommy.make(
+            models.Todo, name='todo_test', user=self.user
         )
 
     def test_todo_creation(self):
@@ -30,10 +30,11 @@ class TodoModelTestsCase(TestCase):
 class TaskModelTestsCase(TestCase):
     def setUp(self):
         self.user = mommy.make('User')
-        self.todo = models.Todo.objects.create(
-            name='todo_test', user=self.user
+        self.todo = mommy.make(
+            models.Todo, name='todo_test', user=self.user
         )
-        self.task = models.Task.objects.create(
+        self.task = mommy.make(
+            models.Task,
             name='task_test',
             deadline=timezone.now(),
             user=self.user,
