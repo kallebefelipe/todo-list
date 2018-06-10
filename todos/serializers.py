@@ -17,7 +17,6 @@ class TaskSerializer(serializers.ModelSerializer):
     name = serializers.CharField(
         max_length=100, allow_blank=False, required=True
     )
-    user = serializers.ReadOnlyField(source='user.id')
 
     class Meta:
         model = models.Task
