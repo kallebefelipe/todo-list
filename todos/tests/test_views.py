@@ -142,17 +142,3 @@ class TaskViewSetTests(TestCase):
         self.client.login(username=self.user.username, password='123')
         response = self.client.delete('/api/tasks/1/')
         self.assertEqual(response.status_code, 204)
-
-    # def test_can_create_task(self):
-    #     self.client.login(username=self.user.username, password='123')
-    #     response = self.client.post(
-    #         '/api/tasks/',
-    #         data=json.dumps({
-    #             'name': 'create_test',
-    #             'todo': self.todo.id,
-    #             'user': self.user.id,
-    #             'deadline': timezone.now()
-    #         }),
-    #         content_type='application/json'
-    #     )
-    #     self.assertEqual(response.status_code, 201)
