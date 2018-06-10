@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.decorators import detail_route
+from rest_framework.response import Response
 
 from . import models
 from . import serializers
@@ -16,6 +18,13 @@ class TodoViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+    @detail_route(methods=['get'])
+    def tasks(self, request, pk=None):
+        tasks = models.Task.objects.filter(todo_id=pk)
+        serializer = serializers.TaskSerializer(tasks, many=True)
+
+        return Response(serializer.data)
 
 
 class TaskViewSet(LoginRequiredMixin, viewsets.ModelViewSet):
