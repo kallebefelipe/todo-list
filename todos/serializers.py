@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
 from rest_framework import serializers
 from . import models
 
@@ -23,18 +24,27 @@ class TodoSerializer(serializers.ModelSerializer):
         model = models.Todo
         fields = ['id', 'name', 'user', 'tasks']
 
-    def get_tasks(self, obj):
+    def is_user_owner(self, obj):
         user = self.context.get('request').user
 
         try:
             models.Todo.objects.get(pk=obj.id, user=user.id)
         except models.Todo.DoesNotExist:
-            tasks = models.Task.objects.filter(
-                user__id=user.id,
-                todo_id=obj.id
-            )
+            return False
         else:
-            tasks = models.Task.objects.filter(todo_id=obj.id)
+            return True
+
+    def get_tasks(self, obj):
+        user = self.context.get('request').user
+
+        kwargs = {
+            'todo_id': obj.id
+        }
+
+        if not self.is_user_owner(obj):
+            kwargs['user__id'] = user.id
+
+        tasks = models.Task.objects.filter(**kwargs)
 
         serializer = TaskSerializer(tasks, many=True)
         return serializer.data
