@@ -13,5 +13,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', include_docs_urls(title='Todo List')),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/', include((api_routers.urls, 'todos', )))
+    path('api/', include((api_routers.urls, 'todos', ))),
+    path('', include(('frontend.urls', 'frontend')))
 ]
