@@ -74,3 +74,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+#node
+node_modules/
