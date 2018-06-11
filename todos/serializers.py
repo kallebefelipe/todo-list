@@ -3,16 +3,6 @@ from rest_framework import serializers
 from . import models
 
 
-class TodoSerializer(serializers.ModelSerializer):
-    name = serializers.CharField(
-        max_length=255, allow_blank=False, required=True)
-    user = serializers.ReadOnlyField(source='user.id')
-
-    class Meta:
-        model = models.Todo
-        fields = ['id', 'name', 'user']
-
-
 class TaskSerializer(serializers.ModelSerializer):
     name = serializers.CharField(
         max_length=100, allow_blank=False, required=True
@@ -20,7 +10,34 @@ class TaskSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Task
-        fields = ['id', 'name', 'todo', 'user']
+        fields = ['id', 'name', 'todo', 'user', 'deadline']
+
+
+class TodoSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(
+        max_length=255, allow_blank=False, required=True)
+    user = serializers.ReadOnlyField(source='user.id')
+    tasks = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Todo
+        fields = ['id', 'name', 'user', 'tasks']
+
+    def get_tasks(self, obj):
+        user = self.context.get('request').user
+
+        try:
+            models.Todo.objects.get(pk=obj.id, user=user.id)
+        except models.Todo.DoesNotExist:
+            tasks = models.Task.objects.filter(
+                user__id=user.id,
+                todo_id=obj.id
+            )
+        else:
+            tasks = models.Task.objects.filter(todo_id=obj.id)
+
+        serializer = TaskSerializer(tasks, many=True)
+        return serializer.data
 
 
 class UserSerializer(serializers.ModelSerializer):
