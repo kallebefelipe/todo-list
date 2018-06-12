@@ -14,5 +14,6 @@ urlpatterns = [
     path('docs/', include_docs_urls(title='Todo List')),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include((api_routers.urls, 'todos', ))),
-    path('', include(('frontend.urls', 'frontend')))
+    path('', include(('frontend.urls', 'frontend'))),
+    path('api/users', views.UserCreate.as_view(), name='account-create'),
 ]
