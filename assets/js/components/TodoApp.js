@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import AddTodoForm from './AddTodoForm';
+import TodoList from './TodoList';
 
 
 class TodoApp extends React.Component {
@@ -14,23 +15,9 @@ class TodoApp extends React.Component {
             <div>
                 <Header />
                 <AddTodoForm />
+                <TodoList />
             </div>
         );
-    }
-
-    populateData = (data) => {
-        this.setState(() => {
-            return {
-                data
-            }
-        });
-        console.log(this.state)
-    }
-
-    componentDidMount() {
-        fetch('/api/todos/')
-            .then((response) => response.json())
-            .then((responseData) => this.populateData(responseData))
     }
 }
 
