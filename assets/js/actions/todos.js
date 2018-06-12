@@ -3,4 +3,9 @@ const populateInitialState = (data) => ({
     data: data
 });
 
-export populateInitialState;
+const addTodo = (todo) => ({
+    type: 'ADD_TODO',
+    todo
+});
+
+export { populateInitialState, addTodo };
