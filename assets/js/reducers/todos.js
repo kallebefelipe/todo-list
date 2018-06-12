@@ -1,17 +1,22 @@
 const todosState = {
-    todos: [
-        {
-            id: 3
-            name: 'nome',
-            tasks: [
-                {
-                    id: 1
-                    name: 'task',
-                    deadline: "2018-06-10T18:16:58Z",
-                    todo: 1,
-                    user: 'kallebe'
-                }
-            ]
-        }
-    ]
+    todos: []
 }
+
+const todoReducer = (state= todosState, action) => {
+    switch(action.type) {
+        case 'POPULATE_INITIAL_STATE':
+            return {
+                todos: action.data
+            };
+            break;
+        case 'ADD_TODO':
+            return {
+                todos: state.todos.concat(action.todo)
+            };
+            break;
+        default:
+            return state
+    }
+}
+
+export default todoReducer;
