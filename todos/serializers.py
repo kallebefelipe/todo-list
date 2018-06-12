@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404
-from rest_framework import serializers
 from . import models
+from django.contrib.auth.models import User
+from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -51,6 +51,14 @@ class TodoSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=False,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    username = serializers.CharField(
+        max_length=32,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
     password = serializers.CharField(
         max_length=100, required=True, allow_blank=False,
         write_only=True
@@ -58,10 +66,13 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'password']
+        fields = ['id', 'username', 'email', 'password']
 
     def create(self, validated_data):
-        user = User(username=validated_data.get('username', None))
+        user = User(
+            username=validated_data.get('username', None),
+            email=validated_data.get('email', None)
+        )
         user.set_password(validated_data.get('password', None))
         user.save()
         return user
