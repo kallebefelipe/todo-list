@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteTask } from '../../actions/tasks';
+import { updateTask } from '../../actions/tasks';
 
 
 class TaskListRow extends React.Component {
@@ -8,29 +9,75 @@ class TaskListRow extends React.Component {
         super(props, context);
         this.state = {
             data: undefined,
+            newName: undefined,
+            update: false,
         };
-        this.deleteTask = this.deleteTask.bind(this);
     }
 
-    deleteTask(event) {
-        this.props.dispatch(deleteTask({
-            todo: this.props.todo,
-            task: this.props.task
-        }));
-        window.location.reload(true);
+    deleteTask = (event) => {
+        this.props.propDeleteTask({
+            task: this.props.task,
+            todo: this.props.todo
+        });
     }
+
+    toEditTask = (event) => {
+        this.setState(() => ({
+            update: true
+        }));
+    }
+
+    subUpdateTask = (event) => {
+        this.props.task.name = this.state.newName;
+        this.props.mapUpdateTask(
+            this.props.task,
+            this.props.todo,
+        );
+        this.setState(() => ({
+            update: false
+        }));
+    }
+
+    editForm = (event) => {
+        return <div> {
+            this.state.update ?
+                <div>
+                <input onChange={(e) => {
+                    const value = e.target.value;
+                    this.setState(() => ({
+                        newName: value
+                    }));
+                }} type="text" placeholder="Name" />
+                <button type="submit" onClick={this.subUpdateTask}>Ok</button>
+                </div>
+                :
+                <button type="submit" onClick={this.toEditTask}>Edit</button>
+            }
+        </div>
+    }
+
 
     render() {
-        console.log('TaskListRow')
         return (
             <div>
-                <p key={this.props.task.id}>{this.props.task.name}
+                <p>{this.props.task.name}</p>
                     <button type="submit" onClick={this.deleteTask}>Remove</button>
-                    <button type="submit">Edit</button>
-                 </p>
+                    {this.editForm()}
             </div>
         )
     }
 };
 
-export default connect()(TaskListRow);
+const mapDispatchToProps = dispatch => {
+    return {
+        propDeleteTask: (task) => {
+            dispatch(deleteTask(task));
+        },
+        mapUpdateTask: (task) => {
+            dispatch(updateTask(task));
+        }
+
+    }
+}
+
+export default connect(() => ({}), mapDispatchToProps)(TaskListRow);
