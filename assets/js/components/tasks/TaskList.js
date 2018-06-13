@@ -4,18 +4,14 @@ import TaskListRow from './TaskListRow';
 
 const TaskList = ({tasks, todo}) => {
     return (
-        <table classname="table">
-            <thead>
-                <tr>
-                    <th>Tasks</th>
-                </tr>
-            </thead>
-            <tbody>
+        <div>
+            <p>Tasks</p>
+            <ul>
                 {tasks ? tasks.map(task =>
                     <TaskListRow key={task.id} task={task} todo={todo}/>
                 ) : 'Loading...'}
-            </tbody>
-        </table>
+            </ul>
+        </div>
     );
 };
 
