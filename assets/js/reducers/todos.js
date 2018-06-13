@@ -35,7 +35,7 @@ const todoReducer = (state= todosState, action) => {
                 })
             };
         }
-        case 'ADD_TASK_SUCCESS':
+        case 'ADD_TASK_SUCCESS': {
             const todos = state.todos.map((todo) => {
                     if (todo.id === action.task.todo){
                         todo.tasks = todo.tasks.concat(action.task);
@@ -45,11 +45,24 @@ const todoReducer = (state= todosState, action) => {
             return {
                 todos
             };
-
-
+        }
+        case 'DELETE_TASK_SUCCESS': {
+            const todos = state.todos.map((todo) => {
+                    if (todo.id === action.todo_id){
+                        todo.tasks = todo.tasks.filter((task) => {
+                            return task.id !== action.task.id
+                        });
+                    }
+                    return todo;
+                })
+            return {
+                todos
+            };
+        }
         default:
             return state
     }
 }
 
 export default todoReducer;
+
