@@ -4,28 +4,53 @@ export function deleteTodoSuccess(todo) {
     return {type: 'DELETE_TODO_SUCCESS', todo};
 }
 
+export function addTodoSuccess(todo) {
+    return {type: 'ADD_TODO_SUCCESS', todo};
+}
+
+export function loadTodoSuccess(todos) {
+    return {type: 'LOAD_TODO_SUCCESS', todos};
+}
+
+export function updateTodoSuccess(todo) {
+    return {type: 'UPDATE_TODO_SUCCESS', todo};
+}
+
 const populateInitialState = (data) => ({
     type: 'POPULATE_INITIAL_STATE',
     data: data
 });
 
-const addTodo = (todo) => ({
-    type: 'ADD_TODO',
-    todo
-});
-
-function loadTodos () {
-    return todoApi.getAllTodos();
+const loadTodos = () => {
+    return (dispatch) => {
+        return todoApi.getAllTodos().then(todos => {
+            dispatch(loadTodoSuccess(todos));
+        });
+    }
 };
 
-function deleteTodo (todo) {
-    return function(dispatch){
+const deleteTodo = (todo) => {
+    return (dispatch) => {
         return todoApi.deleteTodo(todo).then(() => {
-            console.log(`Deleted ${todo.id}`)
-            dispatch(deleteTodoSuccess(todo))
-            return;
+            dispatch(deleteTodoSuccess(todo));
         })
     }
 };
 
-export { populateInitialState, addTodo, deleteTodo, loadTodos };
+const addTodo = function (todo) {
+    return function(dispatch) {
+        return todoApi.addTodo(todo).then((newTodo) => {
+            dispatch(addTodoSuccess(newTodo));
+        })
+    }
+};
+
+const updateTodo = (todo) => {
+    return (dispatch) => {
+        return todoApi.updateTodo(todo).then(() => {
+            dispatch(updateTodoSuccess(todo));
+        })
+    }
+};
+
+export { populateInitialState, addTodo, deleteTodo, loadTodos, updateTodo };
