@@ -21,6 +21,7 @@ class TaskListRow extends React.Component {
     }
 
     render() {
+        console.log('TaskListRow')
         return (
             <div>
                 <p key={this.props.task.id}>{this.props.task.name}
