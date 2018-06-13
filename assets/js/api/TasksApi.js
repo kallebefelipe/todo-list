@@ -30,6 +30,21 @@ class TasksApi {
                 return response.json();
             })
     }
+
+    static updateTask(data) {
+        return fetch(`api/tasks/${data.id}/`, {
+                method: 'PUT',
+                headers: {
+                        'Authorization': "Token a454e53304779130a63789f2440f505182679f8d",
+                        'Content-type': 'application/json',
+                    },
+                body: JSON.stringify(data)
+                },
+
+            ).then((response) =>  {
+                return response.status;
+            })
+    }
 }
 
 export default TasksApi;
