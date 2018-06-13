@@ -1,5 +1,9 @@
 import taskApi from '../api/TasksApi';
 
+export function addTaskSuccess(task) {
+    return {type: 'ADD_TASK_SUCCESS', task};
+}
+
 export function deleteTaskSuccess(task) {
     return {type: 'DELETE_TASK_SUCCESS', task};
 }
@@ -9,10 +13,13 @@ const populateInitialState = (data) => ({
     data: data
 });
 
-const addTask = (task) => ({
-    type: 'ADD_TASK',
-    task
-});
+const addTask = function (task) {
+    return function(dispatch) {
+        return taskApi.addTask(task).then((newTask) => {
+            dispatch(addTaskSuccess(newTask));
+        })
+    }
+};
 
 
 function deleteTask (task) {
