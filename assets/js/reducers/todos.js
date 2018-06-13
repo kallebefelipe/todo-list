@@ -10,23 +10,43 @@ const todoReducer = (state= todosState, action) => {
             return {
                 todos: action.data
             };
-        case 'ADD_TODO':
+        case 'ADD_TODO_SUCCESS':
             return {
                 todos: state.todos.concat(action.todo)
             };
-        case 'LOAD_TODO':
+        case 'LOAD_TODO_SUCCESS':
            return {
-                todos: Object.assign([], state, action.todos)
+                todos: action.todos
             };
         case 'DELETE_TODO_SUCCESS': {
-            const newState = Object.assign([], state);
-            var pos;
-            state.todos.filter(function(todos, index) { pos = index; return todos.id == action.todo.id})
-            newState.todos.splice(pos, 1);
             return {
-                todos: newState.todos
+                todos: state.todos.filter((todo) => {
+                    return todo.id !== action.todo.id
+                })
             };
         }
+        case 'UPDATE_TODO_SUCCESS': {
+            return {
+                todos: state.todos.map((todo) => {
+                    if (todo.id === action.todo.id){
+                        todo.name = action.todo.name;
+                    }
+                    return todo;
+                })
+            };
+        }
+        case 'ADD_TASK_SUCCESS':
+            const todos = state.todos.map((todo) => {
+                    if (todo.id === action.task.todo){
+                        todo.tasks = todo.tasks.concat(action.task);
+                    }
+                    return todo;
+                })
+            return {
+                todos
+            };
+
+
         default:
             return state
     }
