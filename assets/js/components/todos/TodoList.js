@@ -7,10 +7,9 @@ import { loadTodos } from '../../actions/todos';
 class TodoList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchTodos();
+        this.props.fetchTodos(this.props.token);
     }
     render () {
-        console.log(this.props.todos,'TodoList')
         return (
             <div>
                 <p>TODO-LISTS</p>
@@ -26,14 +25,15 @@ class TodoList extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        todos: state.todoReducer.todos
+        todos: state.todoReducer.todos,
+        token: state.authReducer.token,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchTodos: () => {
-            dispatch(loadTodos());
+        fetchTodos: (token) => {
+            dispatch(loadTodos(token));
         }
     }
 }
