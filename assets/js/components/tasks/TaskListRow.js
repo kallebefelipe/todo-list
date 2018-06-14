@@ -17,8 +17,9 @@ class TaskListRow extends React.Component {
     deleteTask = (event) => {
         this.props.propDeleteTask({
             task: this.props.task,
-            todo: this.props.todo
-        });
+            todo: this.props.todo,
+
+        }, this.props.token);
     }
 
     toEditTask = (event) => {
@@ -29,10 +30,9 @@ class TaskListRow extends React.Component {
 
     subUpdateTask = (event) => {
         this.props.task.name = this.state.newName;
-        this.props.mapUpdateTask(
-            this.props.task,
-            this.props.todo,
-        );
+        this.props.mapUpdateTask({
+            task: this.props.task
+        }, this.props.token);
         this.setState(() => ({
             update: false
         }));
@@ -68,16 +68,22 @@ class TaskListRow extends React.Component {
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        token: state.authReducer.token,
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
-        propDeleteTask: (task) => {
-            dispatch(deleteTask(task));
+        propDeleteTask: (task, token) => {
+            dispatch(deleteTask(task, token));
         },
-        mapUpdateTask: (task) => {
-            dispatch(updateTask(task));
+        mapUpdateTask: (task, token) => {
+            dispatch(updateTask(task, token));
         }
 
     }
 }
 
-export default connect(() => ({}), mapDispatchToProps)(TaskListRow);
+export default connect(mapStateToProps, mapDispatchToProps)(TaskListRow);
