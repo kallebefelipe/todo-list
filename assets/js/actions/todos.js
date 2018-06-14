@@ -21,33 +21,33 @@ const populateInitialState = (data) => ({
     data: data
 });
 
-const loadTodos = () => {
+const loadTodos = (token) => {
     return (dispatch) => {
-        return todoApi.getAllTodos().then(todos => {
+        return todoApi.getAllTodos(token).then(todos => {
             dispatch(loadTodoSuccess(todos));
         });
     }
 };
 
-const deleteTodo = (todo) => {
+const deleteTodo = (todo, token) => {
     return (dispatch) => {
-        return todoApi.deleteTodo(todo).then(() => {
+        return todoApi.deleteTodo(todo, token).then(() => {
             dispatch(deleteTodoSuccess(todo));
         })
     }
 };
 
-const addTodo = function (todo) {
+const addTodo = function (todo, token) {
     return function(dispatch) {
-        return todoApi.addTodo(todo).then((newTodo) => {
+        return todoApi.addTodo(todo, token).then((newTodo) => {
             dispatch(addTodoSuccess(newTodo));
         })
     }
 };
 
-const updateTodo = (todo) => {
+const updateTodo = (todo, token) => {
     return (dispatch) => {
-        return todoApi.updateTodo(todo).then(() => {
+        return todoApi.updateTodo(todo, token).then(() => {
             dispatch(updateTodoSuccess(todo));
         })
     }
