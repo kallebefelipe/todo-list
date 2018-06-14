@@ -14,10 +14,10 @@ class Todo(models.Model):
 
 class Task(models.Model):
     name = models.CharField(max_length=100, blank=False, default=None)
-    deadline = models.DateTimeField()
+    deadline = models.DateTimeField(null=True, blank=True)
     user = models.ForeignKey(
-        User, related_name='tasks', on_delete=models.CASCADE, blank=False,
-        null=False)
+        User, related_name='tasks', on_delete=models.CASCADE, blank=True,
+        null=True)
     todo = models.ForeignKey(
         'Todo', related_name='tasks', on_delete=models.CASCADE, blank=False,
         null=False)
