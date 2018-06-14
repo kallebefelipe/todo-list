@@ -13,7 +13,7 @@ class AddTaskForm extends React.Component {
         this.props.addNewTask({
             name: this.state.inputValue,
             todo: this.props.todo,
-        });
+        }, this.props.token);
     };
 
     render() {
@@ -33,12 +33,18 @@ class AddTaskForm extends React.Component {
 
 };
 
+const mapStateToProps = state => {
+    return {
+        token: state.authReducer.token,
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
-        addNewTask: (task) => {
-            dispatch(addTask(task));
+        addNewTask: (task, token) => {
+            dispatch(addTask(task, token));
         }
     }
 }
 
-export default connect(() => ({}), mapDispatchToProps)(AddTaskForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddTaskForm);
