@@ -1,7 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { login } from '../../actions/auth';
 import Register from './Register';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/auth';
+import { Redirect} from 'react-router';
 import { Route } from 'react-router-dom';
 import {browserHistory} from 'react-router';
 
@@ -10,41 +11,22 @@ class Login extends React.Component {
     state = {
         username: '',
         password: '',
-        token: ''
+        token: '',
+        isAuthenticated: false
     }
 
     handleSubmit = (e) => {
-        console.log('foi')
-        e.preventDefault();
-        fetch('/api/users', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: 'novo@gmail.com',
-                username: this.state.username,
-                password: this.state.password
-            })
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-                this.setState(() => ({
-                    token: responseData.token
-                }));
-
-            })
-        var teste = this.state
-    };
-
-    handleClick = () => {
-        debbuger;
-        browserHistory.push('/register');
-    };
-
+        e.preventDefault()
+        this.props.mapLoginUser({
+            username: this.state.username,
+            password: this.state.password
+        });
+    }
 
     render() {
+        if (this.props.isAuthenticated === true) {
+            return <Redirect to='/app' />
+        }
         return (
             <div>
                 <form>
@@ -64,13 +46,25 @@ class Login extends React.Component {
                         }} type="password" placeholder="Password" />
                     <button type="submit" onClick={this.handleSubmit}>Login
                     </button>
-                    <button type="submit" onClick={this.handleClick}>Register
-                    </button>
                 </form>
             </div>
         );
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.authReducer.isAuthenticated
+    }
+}
 
-export default connect()(Login);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        mapLoginUser: (user) => {
+            dispatch(loginUser(user));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
