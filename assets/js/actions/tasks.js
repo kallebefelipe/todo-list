@@ -7,8 +7,7 @@ export function addTaskSuccess(task) {
 export function updateTaskSuccess(data) {
     return {
         type: 'UPDATE_TASK_SUCCESS',
-        task: data.task,
-        todo_id: data.todo.id,
+        task: data.task
     };
 }
 
@@ -20,26 +19,26 @@ export function deleteTaskSuccess(data) {
     };
 }
 
-const addTask = function (task) {
+const addTask = function (task, token) {
     return function(dispatch) {
-        return taskApi.addTask(task).then((newTask) => {
+        return taskApi.addTask(task, token).then((newTask) => {
             dispatch(addTaskSuccess(newTask));
         })
     }
 };
 
-const deleteTask = (task) => {
+const deleteTask = (task, token) => {
     return (dispatch) => {
-        return taskApi.deleteTask(task).then(() => {
+        return taskApi.deleteTask(task, token).then(() => {
             dispatch(deleteTaskSuccess(task));
         })
     }
 };
 
 
-const updateTask = (todo) => {
+const updateTask = (todo, token) => {
     return (dispatch) => {
-        return taskApi.updateTask(todo).then(() => {
+        return taskApi.updateTask(todo, token).then(() => {
             dispatch(updateTaskSuccess(todo));
         })
     }
