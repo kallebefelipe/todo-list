@@ -22,47 +22,45 @@ class TodoListRow extends React.Component {
 
     subDeleteTodo(event) {
         this.props.mapDeleteTodo(
-            this.props.todo
+            this.props.todo,
+            this.props.token
         );
     }
 
     toEditTodo(event) {
         this.setState(() => ({
-            update:true
+            update: true
         }));
     }
 
     subUpdateTodo = (event) => {
         this.props.todo.name = this.state.newName;
-        this.props.mapUpdateTodo(
-            this.props.todo
-        );
+        this.props.mapUpdateTodo({
+            todo: this.props.todo}, this.props.token);
         this.setState(() => ({
-            update:false
+            update: false
         }));
     };
 
     editForm(event) {
-        return <div>
-            {
-                this.state.update ?
-                    <div>
-                    <input onChange={(e) => {
-                        const value = e.target.value;
-                        this.setState(() => ({
-                            newName: value
-                        }));
-                    }} type="text" placeholder="Name" />
-                    <button type="submit" onClick={this.subUpdateTodo}>Ok</button>
-                    </div>
-                    :
-                    <button type="submit" onClick={this.toEditTodo}>Edit</button>
+        return <div> {
+            this.state.update ?
+                <div>
+                <input onChange={(e) => {
+                    const value = e.target.value;
+                    this.setState(() => ({
+                        newName: value
+                    }));
+                }} type="text" placeholder="Name" />
+                <button type="submit" onClick={this.subUpdateTodo}>Ok</button>
+                </div>
+                :
+                <button type="submit" onClick={this.toEditTodo}>Edit</button>
             }
         </div>
     }
 
     render() {
-        console.log('TodoListRow')
         return (
             <div>
                 {this.props.todo.name}
@@ -77,17 +75,18 @@ class TodoListRow extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        todos: state.todoReducer.todos
+        todos: state.todoReducer.todos,
+        token: state.authReducer.token,
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        mapDeleteTodo: (todo) => {
-            dispatch(deleteTodo(todo));
+        mapDeleteTodo: (todo, token) => {
+            dispatch(deleteTodo(todo, token));
         },
-        mapUpdateTodo: (todo) => {
-            dispatch(updateTodo(todo));
+        mapUpdateTodo: (todo, token) => {
+            dispatch(updateTodo(todo, token));
         }
     }
 }
