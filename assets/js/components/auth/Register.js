@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { register } from '../../actions/auth';
+import { registerUser } from '../../actions/auth';
 import { Redirect} from 'react-router';
 
 class Register extends React.Component {
@@ -9,46 +9,20 @@ class Register extends React.Component {
         username: '',
         password: '',
         token: '',
-        toApp: false,
+        isAuthenticated: false
     }
 
     handleSubmit = (e) => {
-        e.preventDefault();
-        fetch('/api/users', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: this.state.email,
-                username: this.state.username,
-                password: this.state.password,
-            })
-        })
-            .then((response) => response.json())
-            .then((responseData) => {
-                console.log(responseData)
-                this.props.dispatch(register({
-                    token: responseData.token,
-                    email: responseData.email,
-                    username: responseData.username,
-                }));
-                this.setState(() => ({
-                    token: responseData.token,
-                }));
-                if (this.state.token.length > 0){
-                    this.setState(()=> ({
-                        toApp: true
-                    }));
-                }
-
-            })
-    };
-
+        e.preventDefault()
+        this.props.mapRegisterUser({
+            username: this.state.username,
+            password: this.state.password,
+            email: this.state.email,
+        });
+    }
 
     render() {
-        if (this.state.toApp === true) {
+        if (this.props.isAuthenticated === true) {
             return <Redirect to='/app' />
         }
         return (
@@ -83,5 +57,19 @@ class Register extends React.Component {
     }
 };
 
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.authReducer.isAuthenticated
+    }
+}
 
-export default connect()(Register);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        mapRegisterUser: (user) => {
+            dispatch(registerUser(user));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
