@@ -2,10 +2,10 @@ import React from 'react';
 import Register from './Register';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/auth';
-import { Redirect} from 'react-router';
+import { Redirect } from 'react-router';
 import { Route } from 'react-router-dom';
 import {browserHistory} from 'react-router';
-
+import {Link} from "react-router-dom";
 
 class Login extends React.Component {
     state = {
@@ -47,6 +47,8 @@ class Login extends React.Component {
                     <button type="submit" onClick={this.handleSubmit}>Login
                     </button>
                 </form>
+                Don't have an account? <Link to="/register">Register</Link>
+
             </div>
         );
     }
