@@ -12,8 +12,10 @@ api_routers.register(r'tasks', views.TaskViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('docs/', include_docs_urls(title='Todo List')),
-    path('api-auth/', include('rest_framework.urls')),
+    path('api/auth/register/', views.RegistrationView.as_view(),
+         name='register-user'),
+    path('api/auth/login/', views.LoginView.as_view()),
+    path('api/auth/', include('knox.urls')),
     path('api/', include((api_routers.urls, 'todos', ))),
     path('', include(('frontend.urls', 'frontend'))),
-    path('api/users', views.UserCreate.as_view(), name='account-create'),
 ]
