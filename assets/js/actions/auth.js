@@ -1,16 +1,20 @@
 import authApi from '../api/AuthApi';
 
-
-const register = (user) => ({
-    type: 'REGISTER',
-    email: user.email,
-    username: user.username,
-    token: user.token
-});
-
 export function userLoginSuccess(data) {
     return {type: 'LOGIN_USER_SUCCESS', data};
 }
+
+export function userRegisterSuccess(data) {
+    return {type: 'REGISTER_USER_SUCCESS', data};
+}
+
+const registerUser = function (user) {
+    return function(dispatch) {
+        return authApi.registerUser(user).then((user) => {
+            dispatch(userLoginSuccess(user));
+        })
+    }
+};
 
 const loginUser = function (user) {
     return function(dispatch) {
@@ -20,4 +24,4 @@ const loginUser = function (user) {
     }
 };
 
-export { register, loginUser };
+export { registerUser, loginUser };
