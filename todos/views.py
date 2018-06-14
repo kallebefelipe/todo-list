@@ -1,13 +1,10 @@
-from todos.serializers import UserSerializer
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from knox.models import AuthToken
+from rest_framework import generics
 from rest_framework import mixins
 from rest_framework import permissions
-from rest_framework import status
 from rest_framework import viewsets
-from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.views import APIView
 
 from . import models
 from . import serializers
@@ -31,7 +28,6 @@ class TodoViewSet(viewsets.ModelViewSet):
 
 
 class TaskViewSet(
-        LoginRequiredMixin,
         mixins.CreateModelMixin, mixins.RetrieveModelMixin,
         mixins.UpdateModelMixin, mixins.DestroyModelMixin,
         viewsets.GenericViewSet):
@@ -46,19 +42,30 @@ class TaskViewSet(
         return self.queryset.all()
 
 
-class UserCreate(APIView):
-    def post(self, request, format='json'):
-        serializer = UserSerializer(data=request.data)
+class RegistrationView(generics.GenericAPIView):
+    serializer_class = serializers.CreateUserSerializer
 
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                token = Token.objects.create(user=user)
-                json = serializer.data
-                token_key = token.key
-                json['token'] = token_key
-                return Response(
-                    json, status=status.HTTP_201_CREATED
-                )
+    def post(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        return Response({
+            'user': serializers.UserSerializer(
+                user, context=self.get_serializer_context()
+            ).data,
+            'token': AuthToken.objects.create(user)
+        })
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class LoginView(generics.GenericAPIView):
+    serializer_class = serializers.LoginUserSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        return Response({
+            'user': serializers.UserSerializer(
+                user, context=self.get_serializer_context()).data,
+            'token': AuthToken.objects.create(user)
+        })
