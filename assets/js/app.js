@@ -14,9 +14,9 @@ const Jsx = () => (
     <Provider store={store}>
         <BrowserRouter>
             <Switch>
-                <Route path='/' component={TodoApp} />
+                <Route exact path='/' component={Login} />
+                <Route path='/app' component={TodoApp} />
                 <Route exact path='/register' component={Register} />
-                <Route exact path='/login' component={Login} />
             </Switch>
         </BrowserRouter>
     </Provider>
