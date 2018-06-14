@@ -2,6 +2,7 @@ const authState = {
     username: '',
     email: '',
     token: '',
+    isAuthenticated: false,
 }
 
 const authReducer = (state= authState, action) => {
@@ -13,6 +14,13 @@ const authReducer = (state= authState, action) => {
                 username: action.username,
             };
             break;
+        case 'LOGIN_USER_SUCCESS':
+            return {
+                token: action.data.token,
+                email: action.data.user.email,
+                username: action.data.user.username,
+                isAuthenticated: true,
+            };
         default:
             return state
     }
