@@ -1,8 +1,8 @@
 class TodosApi {
-    static getAllTodos() {
-        return fetch('/api/todos',{
+    static getAllTodos(token) {
+        return fetch('/api/todos', {
                 headers: {
-                        'Authorization': "Token a454e53304779130a63789f2440f505182679f8d",
+                        'Authorization': `Token ${token}`,
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                 }
@@ -13,11 +13,11 @@ class TodosApi {
             });
     }
 
-    static deleteTodo(data) {
-        return fetch('/api/todos/'+data.id,{
+    static deleteTodo(data, token) {
+        return fetch(`/api/todos/${data.id}/`, {
                 method: 'DELETE',
                 headers: {
-                        'Authorization': "Token a454e53304779130a63789f2440f505182679f8d",
+                        'Authorization': `Token ${token}`,
                         'Content-Type': 'application/x-www-form-urlencoded',
                     },
                 }
@@ -27,11 +27,11 @@ class TodosApi {
             })
     }
 
-    static addTodo(data) {
+    static addTodo(data, token) {
         return fetch('/api/todos/', {
                 method: 'POST',
                 headers: {
-                    'Authorization': "Token a454e53304779130a63789f2440f505182679f8d",
+                    'Authorization': `Token ${token}`,
                     'Accept': 'application/json',
                     'Content-type': 'application/json',
                 },
@@ -41,14 +41,14 @@ class TodosApi {
             })
     }
 
-    static updateTodo(data) {
-        return fetch(`api/todos/${data.id}/`,{
+    static updateTodo(data, token) {
+        return fetch(`api/todos/${data.todo.id}/`, {
                 method: 'PUT',
                 headers: {
-                        'Authorization': "Token a454e53304779130a63789f2440f505182679f8d",
+                        'Authorization': `Token ${token}`,
                         'Content-type': 'application/json',
                     },
-                body: JSON.stringify(data)
+                body: JSON.stringify(data.todo)
                 },
 
             ).then((response) =>  {
