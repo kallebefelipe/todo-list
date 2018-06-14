@@ -5,6 +5,15 @@ const authState = {
     isAuthenticated: false,
 }
 
+const userInfo = (action) => {
+    return {
+        token: action.data.token,
+        email: action.data.user.email,
+        username: action.data.user.username,
+        isAuthenticated: true,
+    };
+}
+
 const authReducer = (state= authState, action) => {
     switch(action.type) {
         case 'REGISTER':
@@ -15,12 +24,9 @@ const authReducer = (state= authState, action) => {
             };
             break;
         case 'LOGIN_USER_SUCCESS':
-            return {
-                token: action.data.token,
-                email: action.data.user.email,
-                username: action.data.user.username,
-                isAuthenticated: true,
-            };
+            return userInfo(action);
+        case 'REGISTER_USER_SUCCESS':
+            return userInfo(action);
         default:
             return state
     }
