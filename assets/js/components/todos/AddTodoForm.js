@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { addTodo } from '../../actions/todos';
 import { connect } from 'react-redux';
 
@@ -26,7 +27,8 @@ class AddTodoForm extends React.Component {
                             inputValue: value
                         }));
                     }} type="text" placeholder="Name" />
-                <button type="submit" onClick={this.handleSubmit}>Add todo list</button>
+                <Button type="button" class="btn btn-outline-dark"
+                 onClick={this.handleSubmit}>Add todo list</Button>
             </form>
         );
     }
