@@ -5,6 +5,7 @@ from rest_framework import mixins
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.response import Response
+# from django.db.models import Prefetch
 
 from . import models
 from . import serializers
@@ -18,9 +19,18 @@ class TodoViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         if not self.request.user.is_superuser:
             return models.Todo.objects.filter(
-                Q(user=self.request.user.id) |
-                Q(tasks__user__id=self.request.user.id)
-            )
+                Q(user_id=self.request.user.id) |
+                Q(tasks__user_id=self.request.user.id)
+            ).distinct()
+            # import ipdb; ipdb.set_trace()
+            # return models.Todo.objects.filter(
+            #     Q(user_id=self.request.user.id) |
+            #     Q(tasks__user_id=self.request.user.id)
+            # ).prefetch_related(Prefetch(
+            #     'tasks',
+            #     queryset=models.Task.objects.filter(
+            #         user_id=self.request.user.id)
+            # )).distinct()
         return self.queryset.all()
 
     def perform_create(self, serializer):
@@ -40,6 +50,16 @@ class TaskViewSet(
                 Q(todo__user__id=self.request.user.id) |
                 Q(user=self.request.user))
         return self.queryset.all()
+
+    def perform_create(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        task = serializer.save()
+        return Response({
+            'task': serializers.TaskSerializer(
+                task, context=self.get_serializer_context()
+            ).data
+        })
 
 
 class RegistrationView(generics.GenericAPIView):
