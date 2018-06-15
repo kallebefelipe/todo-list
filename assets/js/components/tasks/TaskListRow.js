@@ -1,7 +1,10 @@
+import AddTaskForm from '../tasks/AddTaskForm';
+import Popup from "reactjs-popup";
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteTask } from '../../actions/tasks';
 import { updateTask } from '../../actions/tasks';
+import { Button } from 'react-bootstrap';
 
 
 class TaskListRow extends React.Component {
@@ -39,20 +42,18 @@ class TaskListRow extends React.Component {
     }
 
     editForm = (event) => {
-        return <div> {
-            this.state.update ?
-                <div>
-                <input onChange={(e) => {
-                    const value = e.target.value;
-                    this.setState(() => ({
-                        newName: value
-                    }));
-                }} type="text" placeholder="Name" />
-                <button type="submit" onClick={this.subUpdateTask}>Ok</button>
-                </div>
-                :
-                <button type="submit" onClick={this.toEditTask}>Edit</button>
-            }
+        return <div>
+            <Popup trigger={<Button>Edit Task</Button>} position="top left">
+                {close => (
+                  <div>
+                    <AddTaskForm todo={this.props.todo} task={this.props.task} />
+                    <a className="close" onClick={close}>
+                      Cancel
+                    </a>
+                  </div>
+                )}
+              </Popup>
+
         </div>
     }
 
@@ -61,7 +62,7 @@ class TaskListRow extends React.Component {
         return (
             <div>
                 <p>{this.props.task.name}</p>
-                    <button type="submit" onClick={this.deleteTask}>Remove</button>
+                    <Button type="submit" onClick={this.deleteTask}>Remove</Button>
                     {this.editForm()}
             </div>
         )
