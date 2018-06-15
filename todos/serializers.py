@@ -7,6 +7,9 @@ from . import models
 
 
 class TaskSerializer(serializers.ModelSerializer):
+    deadline = serializers.DateField(
+        required=True
+    )
     name = serializers.CharField(
         max_length=100, allow_blank=False, required=True
     )
