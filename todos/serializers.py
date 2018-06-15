@@ -7,16 +7,29 @@ from . import models
 
 
 class TaskSerializer(serializers.ModelSerializer):
-    deadline = serializers.DateField(
-        required=True
+    deadline = serializers.DateTimeField(
+        required=True, format="%Y-%m-%d %H:%M:%S"
     )
     name = serializers.CharField(
         max_length=100, allow_blank=False, required=True
     )
 
+    done = serializers.BooleanField()
+
+    def create(self, validated_data):
+        task = models.Task(
+            name=validated_data.get('name', None),
+            todo=validated_data.get('todo', None),
+            user=validated_data.get('user', None),
+            deadline=validated_data.get('deadline', None),
+            done=validated_data.get('done', None),
+        )
+        task.save()
+        return task
+
     class Meta:
         model = models.Task
-        fields = ['id', 'name', 'todo', 'user', 'deadline']
+        fields = ['id', 'name', 'todo', 'user', 'deadline', 'done']
 
 
 class TodoSerializer(serializers.ModelSerializer):
