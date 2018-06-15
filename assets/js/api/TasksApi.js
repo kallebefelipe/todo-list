@@ -24,7 +24,8 @@ class TasksApi {
                 },
                 body: JSON.stringify({
                     name: data.name,
-                    todo: data.todo.id
+                    deadline: data.deadline,
+                    todo: data.todo
                 })
             }).then((response) =>  {
                 return response.json();
@@ -32,17 +33,21 @@ class TasksApi {
     }
 
     static updateTask(data, token) {
-        return fetch(`api/tasks/${data.task.id}/`, {
+        return fetch(`api/tasks/${data.task}/`, {
                 method: 'PUT',
                 headers: {
                         'Authorization': `Token ${token}`,
                         'Content-type': 'application/json',
                     },
-                body: JSON.stringify(data.task)
+                body: JSON.stringify(
+                    {
+                        name: data.name,
+                        todo: data.todo
+                    })
                 },
 
             ).then((response) =>  {
-                return response.status;
+                return response.json();
             })
     }
 }

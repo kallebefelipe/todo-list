@@ -1,13 +1,13 @@
 import taskApi from '../api/TasksApi';
 
-export function addTaskSuccess(task) {
-    return {type: 'ADD_TASK_SUCCESS', task};
+export function addTaskSuccess(data) {
+    return {type: 'ADD_TASK_SUCCESS', data};
 }
 
 export function updateTaskSuccess(data) {
     return {
         type: 'UPDATE_TASK_SUCCESS',
-        task: data.task
+        task: data
     };
 }
 
@@ -20,6 +20,7 @@ export function deleteTaskSuccess(data) {
 }
 
 const addTask = function (task, token) {
+    console.log(task)
     return function(dispatch) {
         return taskApi.addTask(task, token).then((newTask) => {
             dispatch(addTaskSuccess(newTask));
@@ -36,10 +37,10 @@ const deleteTask = (task, token) => {
 };
 
 
-const updateTask = (todo, token) => {
+const updateTask = (task, token) => {
     return (dispatch) => {
-        return taskApi.updateTask(todo, token).then(() => {
-            dispatch(updateTaskSuccess(todo));
+        return taskApi.updateTask(task, token).then((task) => {
+            dispatch(updateTaskSuccess(task));
         })
     }
 };
