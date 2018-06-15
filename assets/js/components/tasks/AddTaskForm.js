@@ -8,6 +8,7 @@ import { updateTask } from '../../actions/tasks';
 
 class AddTaskForm extends React.Component {
     state = {
+        done: false,
         name: '',
         deadline: '',
         task: {
@@ -27,9 +28,11 @@ class AddTaskForm extends React.Component {
         e.preventDefault()
         if (this.props.task) {
             this.props.mapUpdateTask({
+                done: this.state.done,
                 name: this.state.name,
-                task: this.props.task.id,
+                id: this.props.task.id,
                 todo: this.props.todo.id,
+                deadline: this.state.deadline
         }, this.props.token);
         }else{
             this.props.addNewTask({
