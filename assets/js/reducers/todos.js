@@ -37,8 +37,24 @@ const todoReducer = (state= todosState, action) => {
         }
         case 'ADD_TASK_SUCCESS': {
             const todos = state.todos.map((todo) => {
+                    if (todo.id === action.data.todo){
+                        todo.tasks = todo.tasks.concat(action.data);
+                    }
+                    return todo;
+                })
+            return {
+                todos
+            };
+        }
+        case 'UPDATE_TASK_SUCCESS': {
+            const todos = state.todos.map((todo) => {
                     if (todo.id === action.task.todo){
-                        todo.tasks = todo.tasks.concat(action.task);
+                        todo.tasks = todo.tasks.map((task) => {
+                            if (task.id === action.task.id){
+                                task = action.task;
+                            }
+                            return task;
+                        })
                     }
                     return todo;
                 })
