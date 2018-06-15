@@ -2,7 +2,6 @@ import AddTaskForm from '../tasks/AddTaskForm';
 import Popup from "reactjs-popup";
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteTask } from '../../actions/tasks';
 import { updateTask } from '../../actions/tasks';
 import { Button } from 'react-bootstrap';
 
@@ -25,22 +24,6 @@ class TaskListRow extends React.Component {
         }, this.props.token);
     }
 
-    toEditTask = (event) => {
-        this.setState(() => ({
-            update: true
-        }));
-    }
-
-    subUpdateTask = (event) => {
-        this.props.task.name = this.state.newName;
-        this.props.mapUpdateTask({
-            task: this.props.task
-        }, this.props.token);
-        this.setState(() => ({
-            update: false
-        }));
-    }
-
     editForm = (event) => {
         return <div>
             <Popup trigger={<Button>Edit Task</Button>} position="top left">
@@ -57,11 +40,21 @@ class TaskListRow extends React.Component {
         </div>
     }
 
+    updateDoneTask = (event) => {
+        this.props.task.done = !this.props.task.done;
+        const task = this.props.task;
+        this.props.mapUpdateTask(task, this.props.token);
+    }
 
     render() {
         return (
             <div>
                 <p>{this.props.task.name}</p>
+                    <input type="checkbox"
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        this.updateDoneTask(value);
+                    }} />Done
                     <Button type="submit" onClick={this.deleteTask}>Remove</Button>
                     {this.editForm()}
             </div>
@@ -77,14 +70,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        propDeleteTask: (task, token) => {
-            dispatch(deleteTask(task, token));
+        addNewTask: (task, token) => {
+            dispatch(addTask(task, token));
         },
         mapUpdateTask: (task, token) => {
             dispatch(updateTask(task, token));
         }
-
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskListRow);
