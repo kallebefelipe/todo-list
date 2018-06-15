@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import { Route } from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import {Link} from "react-router-dom";
+import { FormGroup, Form, Col, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
 
 class Login extends React.Component {
     state = {
@@ -29,27 +30,56 @@ class Login extends React.Component {
         }
         return (
             <div>
-                <form>
-                    <input
-                        onChange={(e) => {
+
+                <Form horizontal>
+                    <FormGroup controlId="formHorizontalEmail">
+                        <Col componentClass={ControlLabel} sm={2}>
+                          Login
+                        </Col>
+                        <Col sm={10}>
+                          <FormControl
+                            onChange={(e) => {
                             const value = e.target.value;
                             this.setState(() => ({
                                 username: value
                             }));
-                        }} type="text" placeholder="Name" />
-                    <input
-                        onChange={(e) => {
+                            }}
+                          type="login" placeholder="Login" />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup controlId="formHorizontalPassword">
+                        <Col componentClass={ControlLabel} sm={2}>
+                          Password
+                        </Col>
+                        <Col sm={10}>
+                          <FormControl
+                            onChange={(e) => {
                             const value = e.target.value;
                             this.setState(() => ({
                                 password: value
                             }));
-                        }} type="password" placeholder="Password" />
-                    <button type="submit" onClick={this.handleSubmit}>Login
-                    </button>
-                </form>
-                Don't have an account? <Link to="/register">Register</Link>
+                           }}
+                           type="password" placeholder="Password" />
+                        </Col>
+                    </FormGroup>
 
+                    <FormGroup>
+                        <Col smOffset={2} sm={10}>
+                          <Checkbox>Remember me</Checkbox>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col smOffset={2} sm={10}>
+                        <Button type="submit" onClick={this.handleSubmit}>Login
+                        </Button>
+                        </Col>
+                    </FormGroup>
+                    Don't have an account? <Link to="/register">Register</Link>
+                </Form>;
             </div>
+
         );
     }
 };
