@@ -24,4 +24,5 @@ const loginUser = function (user) {
     }
 };
 
-export { registerUser, loginUser };
+
+export { registerUser, loginUser};
