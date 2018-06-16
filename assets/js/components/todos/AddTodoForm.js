@@ -27,7 +27,7 @@ class AddTodoForm extends React.Component {
                             inputValue: value
                         }));
                     }} type="text" placeholder="Name" />
-                <Button type="button" class="btn btn-outline-dark"
+                <Button type="button" className="btn btn-outline-dark"
                  onClick={this.handleSubmit}>Add todo list</Button>
             </form>
         );
