@@ -2,6 +2,7 @@ const authState = {
     username: '',
     email: '',
     token: '',
+    user: undefined,
     isAuthenticated: false,
 }
 
@@ -10,6 +11,7 @@ const userInfo = (action) => {
         token: action.data.token,
         email: action.data.user.email,
         username: action.data.user.username,
+        user: action.data.user.id,
         isAuthenticated: true,
     };
 }
