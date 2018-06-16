@@ -52,6 +52,7 @@ class TaskViewSet(
         return self.queryset.all()
 
     def perform_create(self, request):
+        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         task = serializer.save()
@@ -89,3 +90,12 @@ class LoginView(generics.GenericAPIView):
                 user, context=self.get_serializer_context()).data,
             'token': AuthToken.objects.create(user)
         })
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return self.queryset.all()
