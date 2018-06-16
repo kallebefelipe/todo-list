@@ -26,7 +26,8 @@ class TasksApi {
                     done: data.done,
                     name: data.name,
                     deadline: `${data.deadline} 09:32:02`,
-                    todo: data.todo
+                    todo: data.todo,
+                    user: data.user,
                 })
             }).then((response) =>  {
                 return response.json();
@@ -46,6 +47,7 @@ class TasksApi {
                         todo: data.todo,
                         deadline: `${data.deadline} 09:32:02`,
                         done: data.done,
+                        user: data.id,
                     })
                 },
 
