@@ -24,23 +24,15 @@ class TodoListRow extends React.Component {
     }
 
   subDeleteTodo(event) {
-      this.props.mapDeleteTodo(
-      this.props.todo,
-      this.props.token
-    );
+    this.props.mapDeleteTodo(this.props.todo, this.props.token);
   }
 
   addTask(event) {
-    this.props.mapDeleteTodo(
-      this.props.todo,
-      this.props.token
-    );
+    this.props.mapDeleteTodo(this.props.todo, this.props.token);
   }
 
   toEditTodo(event) {
-    this.setState(() => ({
-      update: true
-    }));
+    this.setState(() => ({update: true}));
   }
 
   subUpdateTodo = (event) => {
@@ -53,10 +45,11 @@ class TodoListRow extends React.Component {
     if (this.state.update) {
       return (
         <div>
-          <input onChange={(e) => {
-            const value = e.target.value;
-            this.setState(() => ({newName: value}));
-            }} type="text" placeholder="Name" />
+          <input
+            onChange={(e) => {const value = e.target.value; this.setState(() => ({newName: value}));}}
+            type="text"
+            placeholder="Name" />
+
           <Button type="submit" onClick={this.subUpdateTodo}>Ok</Button>
         </div>
       );
@@ -72,6 +65,7 @@ class TodoListRow extends React.Component {
         <h2>{this.props.todo.name}</h2>
         <Button type="submit" onClick={this.subDeleteTodo}>Remove</Button>
         {this.editForm()}
+
         <Popup trigger={<Button>New Task</Button>} position="top left">
           {close => (
             <div>
@@ -80,11 +74,13 @@ class TodoListRow extends React.Component {
             </div>
           )}
         </Popup>
+
         <TaskList tasks={this.props.todo.tasks} todo={this.props.todo} />
       </div>
     )
   }
 };
+
 
 const mapStateToProps = state => {
   return {
@@ -92,6 +88,7 @@ const mapStateToProps = state => {
     token: state.authReducer.token,
   }
 }
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -103,5 +100,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoListRow);
