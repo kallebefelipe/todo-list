@@ -1,4 +1,4 @@
-  import React from 'react';
+import React from 'react';
 import Register from './Register';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/auth';
@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import {Link} from "react-router-dom";
 import { FormGroup, Form, Col, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
+
 
 class Login extends React.Component {
   state = {
@@ -37,13 +38,9 @@ class Login extends React.Component {
           </Col>
           <Col sm={10}>
             <FormControl
-              onChange={(e) => {
-              const value = e.target.value;
-              this.setState(() => ({
-              username: value
-            }));
-          }}
-          type="login" placeholder="Login" />
+              onChange={(e) => {const value = e.target.value; this.setState(() => ({username: value}));}}
+              type="login"
+              placeholder="Login" />
           </Col>
         </FormGroup>
         <FormGroup controlId="formHorizontalPassword">
@@ -52,13 +49,9 @@ class Login extends React.Component {
           </Col>
           <Col sm={10}>
           <FormControl
-            onChange={(e) => {
-            const value = e.target.value;
-            this.setState(() => ({
-              password: value
-            }));
-          }}
-          type="password" placeholder="Password" />
+            onChange={(e) => {const value = e.target.value; this.setState(() => ({password: value}));}}
+            type="password"
+            placeholder="Password" />
           </Col>
         </FormGroup>
         <FormGroup>
@@ -80,6 +73,7 @@ class Login extends React.Component {
   }
 };
 
+
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authReducer.isAuthenticated
@@ -94,5 +88,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
