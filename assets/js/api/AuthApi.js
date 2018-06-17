@@ -1,4 +1,19 @@
 
+function getCookie(name) {
+    if (!document.cookie) {
+      return null;
+    }
+    const token = document.cookie.split(';')
+      .map(c => c.trim())
+      .filter(c => c.startsWith(name + '='));
+
+    if (token.length === 0) {
+      return null;
+    }
+    return decodeURIComponent(token[0].split('=')[1]);
+  }
+
+
 class AuthApi {
 
     static loginUser(data) {
@@ -22,6 +37,40 @@ class AuthApi {
                         'Content-type': 'application/json',
                     },
                 body: JSON.stringify(data)
+                },
+
+            ).then((response) =>  {
+                return response.json();
+            })
+    }
+
+    static forgotPassword(email) {
+        const csrf = getCookie('csrftoken')
+        return fetch('/rest-auth/password/reset/', {
+                method: 'POST',
+                mode: 'same-origin',
+                credentials: 'include',
+                headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json',
+                        'X-CSRFToken': csrf
+                    },
+                body: JSON.stringify({
+                    email: email
+                })
+                },
+
+            ).then((response) =>  {
+                return response.json();
+            })
+    }
+
+    static logoutUser() {
+        return fetch('rest-auth/logout/ ', {
+                method: 'POST',
+                headers: {
+                        'Content-type': 'application/json',
+                    },
                 },
 
             ).then((response) =>  {
