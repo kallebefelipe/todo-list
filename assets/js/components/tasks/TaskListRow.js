@@ -19,8 +19,7 @@ class TaskListRow extends React.Component {
   deleteTask = (event) => {
     this.props.mapDeleteTask({
         task: this.props.task,
-        todo: this.props.todo
-      },
+        todo: this.props.todo},
       this.props.token);
     }
 
@@ -48,11 +47,10 @@ class TaskListRow extends React.Component {
       <li className="responded"><span>{this.props.task.name}</span>
         <label>
           <input type="checkbox"
-            onChange={(e) => {
-              const value = e.target.value;
-              this.updateDoneTask(value);
+            onChange={(e) => {const value = e.target.value; this.updateDoneTask(value);
           }}/>Done
         </label>
+
         <Button type="submit" onClick={(e) => this.deleteTask(e)}>Remove</Button>
         {this.editForm()}
       </li>
@@ -60,24 +58,26 @@ class TaskListRow extends React.Component {
   }
 };
 
+
 const mapStateToProps = state => {
-    return {
-        token: state.authReducer.token,
-    }
+  return {
+    token: state.authReducer.token,
+  }
 }
 
+
 const mapDispatchToProps = dispatch => {
-    return {
-        addNewTask: (task, token) => {
-          dispatch(addTask(task, token));
-        },
-        mapUpdateTask: (task, token) => {
-          dispatch(updateTask(task, token));
-        },
-        mapDeleteTask: (task, token) => {
-          dispatch(deleteTask(task,token))
-        },
-    }
+  return {
+    addNewTask: (task, token) => {
+      dispatch(addTask(task, token));
+    },
+    mapUpdateTask: (task, token) => {
+      dispatch(updateTask(task, token));
+    },
+    mapDeleteTask: (task, token) => {
+      dispatch(deleteTask(task,token))
+    },
+  }
 }
 
 
