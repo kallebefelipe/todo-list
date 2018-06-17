@@ -5,7 +5,6 @@ from rest_framework import mixins
 from rest_framework import permissions
 from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
 from django.db.models import Prefetch
 
 from . import models
@@ -77,21 +76,6 @@ class RegistrationView(generics.GenericAPIView):
                 user, context=self.get_serializer_context()
             ).data,
             'token': AuthToken.objects.create(user)
-        })
-
-
-class ForgotPasswordView(generics.GenericAPIView):
-    serializer_class = serializers.ForgotPasswordSerializer
-
-    def post(self, request):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        import ipdb; ipdb.set_trace()
-
-        tasks.forgot_password_email.delay(serializer.data.get('email'))
-
-        return Response({
-            'message': 'Email enviado!'
         })
 
 
