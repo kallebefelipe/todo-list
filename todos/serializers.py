@@ -110,3 +110,7 @@ class LoginUserSerializer(serializers.Serializer):
             return user
         raise serializers.ValidationError(
             "Unable to log in with provided credentials.")
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(allow_blank=False, required=True)
