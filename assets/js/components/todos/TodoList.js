@@ -13,12 +13,12 @@ class TodoList extends React.Component {
   render () {
     return (
       <div className="main text-center">
-        {this.props.todos.map(todo =>
-          <TodoListRow key={todo.id} todo={todo} />)}
+        {this.props.todos.map(todo => <TodoListRow key={todo.id} todo={todo} />)}
        </div>
     );
   }
 }
+
 
 const mapStateToProps = state => {
   return {
@@ -27,6 +27,7 @@ const mapStateToProps = state => {
   }
 }
 
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchTodos: (token) => {
@@ -34,5 +35,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
