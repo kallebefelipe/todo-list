@@ -6,16 +6,17 @@ import thunkMiddleware from 'redux-thunk';
 
 
 const setUpStore = () => {
-    const store = createStore(
-        combineReducers({
-            todoReducer,
-            authReducer,
-            userReducer,
-        }),
-        applyMiddleware(thunkMiddleware),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
-    return store;
+  const store = createStore(
+    combineReducers({
+      todoReducer,
+      authReducer,
+      userReducer,
+    }),
+    applyMiddleware(thunkMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+  return store;
 };
+
 
 export default setUpStore;
