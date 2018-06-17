@@ -12,8 +12,8 @@ class AddTodoForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.addNewTodo({
-      name: this.state.inputValue,
-      tasks: this.state.tasks},
+        name: this.state.inputValue,
+        tasks: this.state.tasks},
       this.props.token);
   };
 
@@ -21,11 +21,10 @@ class AddTodoForm extends React.Component {
     return (
       <form className='submit-todo'>
         <input
-          onChange={(e) => {
-            const value = e.target.value;
-            this.setState(() => ({inputValue: value}));
-            }}
-            type="text" placeholder="Name" />
+          onChange={(e) => {const value = e.target.value; this.setState(() => ({inputValue: value}));}}
+          type="text"
+          placeholder="Name" />
+
         <Button type="button" className="btn btn-outline-dark"
           onClick={this.handleSubmit}>Add todo List</Button>
       </form>
@@ -33,11 +32,13 @@ class AddTodoForm extends React.Component {
   }
 };
 
+
 const mapStateToProps = state => {
   return {
     token: state.authReducer.token,
   }
 }
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -46,5 +47,6 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodoForm);
