@@ -1,6 +1,6 @@
 class TodosApi {
     static getAllTodos(token) {
-        return fetch('/api/todos', {
+        return fetch('/api/todos/', {
                 headers: {
                         'Authorization': `Token ${token}`,
                         'Content-Type': 'application/x-www-form-urlencoded',
