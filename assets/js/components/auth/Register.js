@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/auth';
 import { Redirect} from 'react-router';
 
+
 class Register extends React.Component {
   state = {
     email: '',
@@ -29,21 +30,17 @@ class Register extends React.Component {
       <div>
         <form>
           <input
-            onChange={(e) => {
-              const value = e.target.value;
-              this.setState(() => ({email: value}));
-            }}
-            type="text" placeholder="email" />
+            onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
+            type="text"
+            placeholder="email" />
           <input
-            onChange={(e) => {
-              const value = e.target.value;
-              this.setState(() => ({username: value}));
-            }} type="text" placeholder="Name" />
+            onChange={(e) => {const value = e.target.value; this.setState(() => ({username: value}));}}
+            type="text"
+            placeholder="Name" />
           <input
-            onChange={(e) => {
-              const value = e.target.value;
-              this.setState(() => ({password: value}));
-            }} type="password" placeholder="Password" />
+            onChange={(e) => {const value = e.target.value; this.setState(() => ({password: value}));}}
+            type="password"
+            placeholder="Password" />
           <button type="submit" onClick={this.handleSubmit}>Register</button>
         </form>
       </div>
@@ -51,11 +48,13 @@ class Register extends React.Component {
     }
 };
 
+
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.authReducer.isAuthenticated
   }
 }
+
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -64,5 +63,6 @@ const mapDispatchToProps = dispatch => {
       }
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
