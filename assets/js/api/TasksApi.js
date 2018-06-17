@@ -1,7 +1,7 @@
 class TasksApi {
 
     static deleteTask(data, token) {
-        return fetch(`/api/tasks/${data.task.id}`, {
+        return fetch(`/api/tasks/${data.task.id}/`, {
                 method: 'DELETE',
                 headers: {
                         'Authorization': `Token ${token}`,
@@ -47,7 +47,7 @@ class TasksApi {
                         todo: data.todo,
                         deadline: `${data.deadline} 09:32:02`,
                         done: data.done,
-                        user: data.id,
+                        user: data.user,
                     })
                 },
 
