@@ -3,16 +3,14 @@ import TaskListRow from './TaskListRow';
 
 
 const TaskList = ({tasks, todo}) => {
-    return (
-        <div>
-            <p>Tasks</p>
-            <ul>
-                {tasks ? tasks.map(task =>
-                    <TaskListRow key={task.id} task={task} todo={todo}/>
-                ) : 'Loading...'}
-            </ul>
-        </div>
-    );
+  return (
+    <ul>
+      {tasks ? tasks.map(task =>
+        <TaskListRow key={task.id} task={task} todo={todo}/>
+        ) : 'Loading...'}
+    </ul>
+  );
 };
+
 
 export default TaskList;
