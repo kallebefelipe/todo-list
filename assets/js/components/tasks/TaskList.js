@@ -6,7 +6,10 @@ const TaskList = ({tasks, todo}) => {
   return (
     <ul>
       {tasks ? tasks.map(task =>
-        <TaskListRow key={task.id} task={task} todo={todo}/>
+        <TaskListRow
+          key={task.id}
+          task={task}
+          todo={todo}/>
         ) : 'Loading...'}
     </ul>
   );
