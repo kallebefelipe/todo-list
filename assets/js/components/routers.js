@@ -39,10 +39,12 @@ class Jsx extends React.Component {
 
 };
 
+
 const mapStateToProps = (state) => {
   return {
     isAuthenticated: state.authReducer.isAuthenticated
   }
 }
+
 
 export default connect(mapStateToProps)(Jsx);
