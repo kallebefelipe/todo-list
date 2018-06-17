@@ -22,8 +22,10 @@ module.exports = {
   },
   devtool: 'cheap-module-eval-source-map',
   devServer: {
-    contentBase: path.join(__dirname, '/assets/js/')
-  }
+    historyApiFallback:{index:'./frontend/templates/frontend/home.html'},
+    contentBase: './',
+    hot: true
+  },
 };
 
 console.log(__dirname);
