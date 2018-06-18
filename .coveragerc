@@ -1,5 +1,6 @@
 [run]
 omit =
+    node_modules/*
     */migrations/*
     */tests/*
     *__init__.py
