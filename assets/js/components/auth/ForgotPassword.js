@@ -17,19 +17,21 @@ class ForgotPassword extends React.Component {
   }
 
   render () {
-    return <Form>
-      <FormGroup>
-        <InputGroup>
-          <InputGroup.Addon>@</InputGroup.Addon>
-          <FormControl
-            onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
-            type="email"
-            placeholder="Email"
-            name='email' />
-        </InputGroup>
-        <Button type="submit" onClick={(e) => (this.handleSubmit(e))}>Submit</Button>
-      </FormGroup>
-    </Form>
+    return <div className="auth">
+      <Form>
+        <FormGroup>
+          <InputGroup>
+            <InputGroup.Addon>@</InputGroup.Addon>
+            <FormControl
+              onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
+              type="email"
+              placeholder="Email"
+              name='email' />
+          </InputGroup>
+          <Button type="submit" onClick={(e) => (this.handleSubmit(e))}>Submit</Button>
+        </FormGroup>
+      </Form>
+    </div>
   }
 };
 
