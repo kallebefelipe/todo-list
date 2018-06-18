@@ -52,14 +52,6 @@ class TaskModelTestsCase(TestCase):
                 todo=self.todo
             )
 
-    def test_task_creation_without_user(self):
-        with self.assertRaises(IntegrityError):
-            models.Task.objects.create(
-                name='task_test',
-                deadline=timezone.now(),
-                todo=self.todo
-            )
-
     def test_task_creation_without_todo(self):
         with self.assertRaises(IntegrityError):
             models.Task.objects.create(
