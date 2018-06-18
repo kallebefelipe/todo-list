@@ -47,7 +47,7 @@ class AuthApi {
     }
 
   static logoutUser() {
-    return fetch('rest-auth/logout/ ', {
+    return fetch('rest-auth/logout/', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
