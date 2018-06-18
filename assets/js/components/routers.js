@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import AddTaskForm from './tasks/AddTaskForm';
 import ForgotPassword from './auth/ForgotPassword';
 import Login from './auth/Login';
+import React from 'react';
 import Register from './auth/Register';
 import TodoApp from './TodoApp';
+import { connect } from 'react-redux';
+import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
 
 class Jsx extends React.Component {
