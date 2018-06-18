@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from django.db.models import Prefetch
 
 from . import models
+from . import views
 from . import serializers
-from . import tasks
 
 
 class TodoViewSet(viewsets.ModelViewSet):
@@ -19,10 +19,6 @@ class TodoViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if not self.request.user.is_superuser:
-            # return models.Todo.objects.filter(
-            #     Q(user_id=self.request.user.id) |
-            #     Q(tasks__user_id=self.request.user.id)
-            # ).distinct()
             return models.Todo.objects.filter(
                 Q(user_id=self.request.user.id) |
                 Q(tasks__user_id=self.request.user.id)
@@ -31,7 +27,6 @@ class TodoViewSet(viewsets.ModelViewSet):
                 queryset=models.Task.objects.filter(
                     user_id=self.request.user.id)
             )).distinct()
-            return q
         return self.queryset.all()
 
     def perform_create(self, serializer):
@@ -53,7 +48,6 @@ class TaskViewSet(
         return self.queryset.all()
 
     def perform_create(self, request):
-        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         task = serializer.save()
