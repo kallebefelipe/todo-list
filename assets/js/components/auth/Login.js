@@ -1,12 +1,12 @@
 import React from 'react';
 import Register from './Register';
 import { connect } from 'react-redux';
+import { FormGroup, Form, Col, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
 import { loginUser } from '../../actions/auth';
 import { Redirect } from 'react-router';
 import { Route } from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import {Link} from "react-router-dom";
-import { FormGroup, Form, Col, ControlLabel, FormControl, Checkbox, Button } from 'react-bootstrap';
 
 
 class Login extends React.Component {
@@ -30,7 +30,7 @@ class Login extends React.Component {
       return <Redirect to='/' />
     }
     return (
-      <div>
+      <div className="auth">
         <Form horizontal>
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={2}>
@@ -55,11 +55,6 @@ class Login extends React.Component {
           </Col>
         </FormGroup>
         <FormGroup>
-          <Col smOffset={2} sm={10}>
-          <Checkbox>Remember me</Checkbox>
-          </Col>
-        </FormGroup>
-        <FormGroup>
             <Col smOffset={2} sm={10}>
             <Button type="submit" onClick={this.handleSubmit}>Login</Button>
             <Button type="submit" onClick={(e) => (e.preventDefault())}>
@@ -67,7 +62,7 @@ class Login extends React.Component {
             <p>Forgot your <Link to="/forgot-password">password ?</Link></p>
             </Col>
           </FormGroup>
-        </Form>;
+        </Form>
       </div>
     );
   }
