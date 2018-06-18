@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/auth';
+import { FormGroup, Form, Col, ControlLabel, FormControl, Checkbox, Button, InputGroup } from 'react-bootstrap';
 import { Redirect} from 'react-router';
+import { registerUser } from '../../actions/auth';
 
 
 class Register extends React.Component {
@@ -27,25 +28,53 @@ class Register extends React.Component {
       return <Redirect to='/' />
     }
     return (
-      <div>
-        <form>
-          <input
-            onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
-            type="text"
-            placeholder="email" />
-          <input
-            onChange={(e) => {const value = e.target.value; this.setState(() => ({username: value}));}}
-            type="text"
-            placeholder="Name" />
-          <input
+      <div className="auth">
+      <Form horizontal>
+        <FormGroup controlId="formHorizontalEmail">
+          <Col componentClass={ControlLabel} sm={2}>
+            Email
+          </Col>
+          <InputGroup>
+            <InputGroup.Addon>@</InputGroup.Addon>
+            <FormControl
+              onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
+              type="email"
+              placeholder="Email"
+              name='email' />
+          </InputGroup>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalEmail">
+          <Col componentClass={ControlLabel} sm={2}>
+            Login
+          </Col>
+          <Col sm={10}>
+            <FormControl
+              onChange={(e) => {const value = e.target.value; this.setState(() => ({username: value}));}}
+              type="login"
+              placeholder="Login" />
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalPassword">
+          <Col componentClass={ControlLabel} sm={2}>
+            Password
+          </Col>
+          <Col sm={10}>
+          <FormControl
             onChange={(e) => {const value = e.target.value; this.setState(() => ({password: value}));}}
             type="password"
             placeholder="Password" />
-          <button type="submit" onClick={this.handleSubmit}>Register</button>
-        </form>
+          </Col>
+        </FormGroup>
+        <FormGroup>
+            <Col smOffset={2} sm={10}>
+            <Button type="submit" onClick={this.handleSubmit}>Register</Button>
+            </Col>
+          </FormGroup>
+        </Form>
       </div>
-      );
-    }
+
+    );
+  }
 };
 
 
