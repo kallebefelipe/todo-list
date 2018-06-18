@@ -6,7 +6,7 @@ const authState = {
 
 const userReducer = (state= authState, action) => {
   switch(action.type) {
-    case 'LOAD_USER_SUCCESS':
+    case 'LOAD_USERS_SUCCESS':
       return {
         users: action.users
       };

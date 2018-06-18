@@ -34,6 +34,7 @@ const authReducer = (state= authState, action) => {
       localStorage.setItem("token", action.data.token);
       return userInfo(action);
     case 'REGISTER_USER_SUCCESS':
+      localStorage.setItem("token", action.data.token);
       return userInfo(action);
     case 'FORGOT_PASSWORD_SUCCESS':
       return userInfo(action);
