@@ -9,18 +9,7 @@ class TodoSerializerTests(TestCase):
     def setUp(self):
         self.user = mommy.make('User')
         self.todo = mommy.make(
-            models.Todo, name='todo_test', user=self.user
-        )
-
-    def test_todo_serializer_with_instance(self):
-        serializer = serializers.TodoSerializer(self.todo)
-        self.assertEqual(
-            serializer.data,
-            {
-                'id': self.todo.id,
-                'name': 'todo_test',
-                'user': self.user.id
-            }
+            models.Todo, name='todo_test', user=self.user, tasks=[]
         )
 
     def test_todo_serializer_with_data(self):
@@ -49,17 +38,6 @@ class TaskSerializerTests(TestCase):
         )
         self.task = mommy.make(
             'Task', name='task_test', user=self.user, todo=self.todo
-        )
-
-    def test_todo_serializer_with_instance(self):
-        serializer = serializers.TodoSerializer(self.todo)
-        self.assertEqual(
-            serializer.data,
-            {
-                'id': self.todo.id,
-                'name': 'todo_test',
-                'user': self.user.id
-            }
         )
 
     def test_task_serializer_with_data(self):
@@ -92,15 +70,16 @@ class UserSerializerTests(TestCase):
             {
                 'id': self.user.id,
                 'username': self.user.username,
+                'email': ''
             }
         )
 
     def test_user_serializer_with_data(self):
         data = {
             'username': 'Kallebe',
-            'password': '123'
+            'password': '123',
+            'email': 'kallebe@test.com'
         }
-
         serializer = serializers.UserSerializer(data=data)
         self.assertTrue(serializer.is_valid(raise_exception=True))
         serializer.save()
@@ -119,4 +98,35 @@ class UserSerializerTests(TestCase):
         }
         with self.assertRaises(ValidationError):
             serializer = serializers.UserSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+
+
+class LoginUserSerializerTests(TestCase):
+    def setUp(self):
+        self.user = mommy.make('User')
+
+    def test_login_user_serializer_with_instance(self):
+        serializer = serializers.LoginUserSerializer(self.user)
+        self.assertEqual(
+            serializer.data,
+            {
+                'username': self.user.username,
+                'password': self.user.password
+            }
+        )
+
+    def test_user_serializer_without_username(self):
+        data = {
+            'password': '123'
+        }
+        with self.assertRaises(ValidationError):
+            serializer = serializers.LoginUserSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+
+    def test_user_serializer_without_password(self):
+        data = {
+            'username': 'Kallebe'
+        }
+        with self.assertRaises(ValidationError):
+            serializer = serializers.LoginUserSerializer(data=data)
             serializer.is_valid(raise_exception=True)
