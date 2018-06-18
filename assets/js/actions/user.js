@@ -2,7 +2,7 @@ import userApi from '../api/UserApi';
 
 
 export function getUsersSuccess(data) {
-  return {type: 'LOAD_USER_SUCCESS', users: data};
+  return {type: 'LOAD_USERS_SUCCESS', users: data};
 }
 
 
