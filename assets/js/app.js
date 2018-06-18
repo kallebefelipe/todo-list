@@ -1,11 +1,11 @@
 import 'normalize.css/normalize.css';
+import Jsx from './components/routers';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import setUpStore from './store/configureStore';
+import { connect } from 'react-redux';
 import { loadTodos } from './actions/todos';
 import { Provider } from 'react-redux';
-import { connect } from 'react-redux';
-import Jsx from './components/routers';
 
 
 const store = setUpStore();
