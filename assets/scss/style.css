@@ -198,6 +198,11 @@ td:last-child {
   .main {
     padding: 2em 1em .75em;
   }
+  .auth {
+    padding: 10em 30em 25em ;
+    z-index: 10;
+    border-radius: .35em;
+  }
   .counter {
     margin-top: 1.65em;
     padding-top: 1.5em;
@@ -236,6 +241,12 @@ td:last-child {
     padding: 3.8em 1.5em .75em;
     position: relative;
     z-index: 10;
+  }
+  .auth {
+    padding: 10em 30em 25em;
+    position: relative;
+    z-index: 10;
+    border-radius: .35em;
   }
   .counter {
     float: right;
@@ -277,4 +288,8 @@ td:last-child {
 
 .edit-task {
   display: inline-block;
+}
+
+.error {
+  border: 1px solid red;
 }
