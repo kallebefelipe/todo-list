@@ -27,7 +27,7 @@ SECRET_KEY = '7v)g&&f8%s!dexa62*#4=78n6wf^z3xai+7(5_-45s#7q=7=v6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['todo-list-web-app.herokuapp.com', '127.0.0.1:8000']
 
 
 # Application definition
@@ -157,3 +157,6 @@ EMAIL_HOST_USER = 'kallebefelipe@gmail.com'
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
