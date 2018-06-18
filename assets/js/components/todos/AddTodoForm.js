@@ -11,10 +11,12 @@ class AddTodoForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addNewTodo({
-        name: this.state.inputValue,
-        tasks: this.state.tasks},
-      this.props.token);
+    if (this.state.inputValue){
+      this.props.addNewTodo({
+          name: this.state.inputValue,
+          tasks: this.state.tasks},
+        this.props.token);
+    }
   };
 
   render() {
@@ -23,7 +25,9 @@ class AddTodoForm extends React.Component {
         <input
           onChange={(e) => {const value = e.target.value; this.setState(() => ({inputValue: value}));}}
           type="text"
-          placeholder="Name" />
+          placeholder="Name"
+          validationState="warning"
+          required/>
 
         <Button type="button" className="btn btn-outline-dark"
           onClick={this.handleSubmit}>Add todo List</Button>
