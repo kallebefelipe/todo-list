@@ -24,7 +24,7 @@ class TasksApi {
         body: JSON.stringify({
           done: data.done,
           name: data.name,
-          deadline: `${data.deadline} 00:00:00`,
+          deadline: `${data.deadline}`,
           todo: data.todo,
           user: data.user,
         })
@@ -43,7 +43,7 @@ class TasksApi {
       body: JSON.stringify({
         name: data.name,
         todo: data.todo,
-        deadline: `${data.deadline} 00:00:00`,
+        deadline: `${data.deadline}`,
         done: data.done,
         user: data.user,
         })
