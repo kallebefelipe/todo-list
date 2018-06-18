@@ -13,7 +13,6 @@ class TaskSerializer(serializers.ModelSerializer):
     name = serializers.CharField(
         max_length=100, allow_blank=False, required=True
     )
-
     done = serializers.BooleanField(required=False)
 
     class Meta:
