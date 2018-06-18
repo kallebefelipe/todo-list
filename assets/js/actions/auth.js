@@ -24,7 +24,7 @@ export function logoutSuccess(response) {
 const registerUser = function (user) {
   return function(dispatch) {
     return authApi.registerUser(user).then((user) => {
-      dispatch(userLoginSuccess(user));
+      dispatch(userRegisterSuccess(user));
     })
   }
 };
