@@ -10,8 +10,8 @@ def send_email(user, tasks):
     " task with deadline for today:"
 
     for count, user_task in enumerate(tasks):
-        body += 'Task: ' + user_task.name + 'Deadline: ' + str(
-            user_task.deadline)
+        body += '\n\n'+str(count) + ' Task: \n' + user_task.name + (
+            'Deadline: ' + str(user_task.deadline.split(' ')[0]))
 
     email = EmailMessage(
         'Web App Todo List Report', body, to=[user.email])
