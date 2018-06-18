@@ -8,7 +8,7 @@ class TodosApi {
         'Content-Type': 'application/x-www-form-urlencoded',
         },
       }).then((response) => response.json()).then((responseData) => {
-          return responseData;
+        return responseData;
       });
     }
 
