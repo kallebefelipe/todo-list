@@ -26,7 +26,6 @@ class AddTodoForm extends React.Component {
           onChange={(e) => {const value = e.target.value; this.setState(() => ({inputValue: value}));}}
           type="text"
           placeholder="Name"
-          validationState="warning"
           required/>
 
         <Button type="button" className="btn btn-outline-dark"
