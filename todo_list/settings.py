@@ -149,7 +149,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'assets'), )
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-# CELERY_BROKER_URL = config('REDIS_URL')
+CELERY_BROKER_URL = config('REDIS_URL')
 
 # Email settings
 EMAIL_HOST = 'smtp.gmail.com'
