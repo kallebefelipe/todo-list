@@ -6,12 +6,11 @@ from todos import models
 
 
 def send_email(user, tasks):
-    body = "Hello From Web App Todo App. Do you have the follows"
-    " task with deadline for today:"
+    body = "Hello From Web App Todo App. Do you have the follows task for today:"
 
     for count, user_task in enumerate(tasks):
-        body += '\n\n'+str(count) + ' Task: \n' + user_task.name + (
-            'Deadline: ' + str(user_task.deadline.split(' ')[0]))
+        body += '\n\n'+str(count+1) + ' Task: \n' + user_task.name + (
+            '\n Deadline: ' + str(user_task.deadline))
 
     email = EmailMessage(
         'Web App Todo List Report', body, to=[user.email])
@@ -22,7 +21,6 @@ def send_email(user, tasks):
 def report_task():
     start = datetime.datetime.today() - datetime.timedelta(1)
     end = start + datetime.timedelta(days=1)
-    users = models.User.objects.all()
 
     users = models.User.objects.prefetch_related(
       Prefetch(
