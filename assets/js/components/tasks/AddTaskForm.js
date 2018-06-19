@@ -75,14 +75,16 @@ class AddTaskForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <form className="form-task">
+        <label>Task Name:</label>
         <input
           onChange={(e) => {this.updateValue(e, {name: e.target.value})}}
-          type="text" placeholder="Name"
+          type="text" placeholder="Task Name"
           value={this.state.name}
           className={this.state.erros.name ? "error" : ""}
         />
 
+        <label>Deadline:</label>
         <input
           onChange={(e) => {this.updateDataValue(e, e.target.value)}}
           value={this.state.deadline.split(' ')[0]}
@@ -91,13 +93,15 @@ class AddTaskForm extends React.Component {
           required="required"
         />
 
-        <ButtonToolbar>
-          <DropdownButton
-            title={this.state.assign_title}
-            id="dropdown-size-medium">
-            {this.generateUserList()}
-          </DropdownButton>
-        </ButtonToolbar>
+        <div className="assign">
+          <ButtonToolbar className="assign">
+            <DropdownButton
+              title={this.state.assign_title}
+              id="dropdown-size-medium">
+              {this.generateUserList()}
+            </DropdownButton>
+          </ButtonToolbar>
+        </div>
 
         <Button type="submit" onClick={this.handleSubmit}>Save</Button>
       </form>
