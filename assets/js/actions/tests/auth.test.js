@@ -18,10 +18,7 @@ describe('actions', () => {
     }
     expect(actions.userLoginSuccess(data)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to register user', () => {
     const data = {user: {}}
     const expectedAction = {
@@ -30,10 +27,7 @@ describe('actions', () => {
     }
     expect(actions.userRegisterSuccess(data)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to forgot password', () => {
     const response = {response: {}}
     const expectedAction = {
@@ -42,10 +36,7 @@ describe('actions', () => {
     }
     expect(actions.forgotPasswordSuccess(response)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to logout success', () => {
     const response = {response: {}}
     const expectedAction = {
@@ -63,9 +54,11 @@ describe('async actions', () => {
     fetchMock.restore()
   })
 
+  const header = {'content-type': 'application/json' }
+
   it('creates REGISTER_USER_SUCCESS when fetching register user has been done', () => {
     fetchMock
-      .postOnce('api/auth/register/', {body: {username: '', password: '', email: ''}, headers: {'content-type': 'application/json' }})
+      .postOnce('api/auth/register/', {body: {username: '', password: '', email: ''}, headers: header})
 
     const expectedActions = [
       {type: 'REGISTER_USER_SUCCESS', data: {username: '', password: '', email: ''}}
@@ -76,18 +69,10 @@ describe('async actions', () => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
-})
-
-
-describe('async actions', () => {
-  afterEach(() => {
-    fetchMock.reset()
-    fetchMock.restore()
-  })
 
   it('creates LOGIN_USER_SUCCESS when fetching login user has been done', () => {
     fetchMock
-      .postOnce('api/auth/login/', {body: {username: '', password: ''}, headers: {'content-type': 'application/json' }})
+      .postOnce('api/auth/login/', {body: {username: '', password: ''}, headers: header})
 
     const expectedActions = [
       {type: 'LOGIN_USER_SUCCESS', data: {username: '', password: ''}}
@@ -98,18 +83,10 @@ describe('async actions', () => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
-})
-
-
-describe('async actions', () => {
-  afterEach(() => {
-    fetchMock.reset()
-    fetchMock.restore()
-  })
 
   it('creates FORGOT_PASSWORD_SUCCESS when fetching forgot password has been done', () => {
     fetchMock
-      .postOnce('/rest-auth/password/reset/', {body: {email: ''}, headers: {'content-type': 'application/json' }})
+      .postOnce('/rest-auth/password/reset/', {body: {email: ''}, headers: header})
 
     const expectedActions = [
       {type: 'FORGOT_PASSWORD_SUCCESS', response: {email: ''}}
@@ -120,18 +97,10 @@ describe('async actions', () => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
-})
-
-
-describe('async actions', () => {
-  afterEach(() => {
-    fetchMock.reset()
-    fetchMock.restore()
-  })
 
   it('creates LOGOUT_SUCCESS when fetching logout has been done', () => {
     fetchMock
-      .postOnce('rest-auth/logout/', {body: {user: 'id'}, headers: {'content-type': 'application/json' }})
+      .postOnce('rest-auth/logout/', {body: {user: 'id'}, headers: header})
 
     const expectedActions = [
       {type: 'LOGOUT_SUCCESS', response: {user: 'id'}}
