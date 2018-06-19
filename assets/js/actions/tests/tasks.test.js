@@ -19,10 +19,7 @@ describe('actions', () => {
     }
     expect(actions.addTaskSuccess(data)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to update task', () => {
     const task = {data: {}}
     const expectedAction = {
@@ -31,10 +28,7 @@ describe('actions', () => {
     }
     expect(actions.updateTaskSuccess(task)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to delete task', () => {
     const data = {task: '', todo: {id: 'id'}}
     const expectedAction = {
