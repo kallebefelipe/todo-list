@@ -4,9 +4,6 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject",
     "live-server": "live-server public/",
     "dev-server": "webpack-dev-server --inline --content-base . --history-api-fallback",
     "test": "jest",
