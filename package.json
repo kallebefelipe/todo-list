@@ -9,7 +9,8 @@
     "eject": "react-scripts eject",
     "live-server": "live-server public/",
     "dev-server": "webpack-dev-server --inline --content-base . --history-api-fallback",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
