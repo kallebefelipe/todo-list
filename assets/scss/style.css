@@ -1,3 +1,4 @@
+
 /* =================================
   Element Styles
 ==================================== */
@@ -83,8 +84,8 @@ button {
 
 input,
 button {
-  border: none;
   outline: none;
+  margin-right: 10px;
 }
 
 header {
@@ -100,6 +101,7 @@ header input {
   font-size: 1.15em;
   width: 100%;
 }
+
 
 li span,
 li input[type=text] {
@@ -127,6 +129,10 @@ li label {
 li span,
 li input[type=text]:first-child {
   display: block;
+}
+
+label {
+  margin-right: 10px:
 }
 
 li button {
@@ -186,6 +192,7 @@ td:last-child {
   }
   form button {
     padding: 12px 0;
+    padding-right: : 10px;
     margin-top: .5em;
   }
   form input {
@@ -286,10 +293,25 @@ td:last-child {
   }
 }
 
-.edit-task {
-  display: inline-block;
+.form-task {
+  text-align: center;
+  margin-top: 15px;
 }
 
 .error {
   border: 1px solid red;
+}
+
+.modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    margin-top: 200px;
+}
+
+.assign {
+  float: right;
+}
+
+#form-task input {
+  padding-right: 10px
 }
