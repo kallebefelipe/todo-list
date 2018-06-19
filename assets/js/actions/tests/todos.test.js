@@ -19,10 +19,7 @@ describe('actions', () => {
     }
     expect(actions.deleteTodoSuccess(todo)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to add todo', () => {
     const todo = {data: {}}
     const expectedAction = {
@@ -31,10 +28,7 @@ describe('actions', () => {
     }
     expect(actions.addTodoSuccess(todo)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to load todos', () => {
     const data = {todos: []}
     const expectedAction = {
@@ -42,10 +36,7 @@ describe('actions', () => {
       todos: {'todos': []}}
     expect(actions.loadTodoSuccess(data)).toEqual(expectedAction)
   })
-})
 
-
-describe('actions', () => {
   it('should create an action to update todos', () => {
     const data = {todo: 'id'}
     const expectedAction = {
@@ -61,10 +52,11 @@ describe('async actions', () => {
     fetchMock.reset()
     fetchMock.restore()
   })
+  const header = {'content-type': 'application/json' }
 
   it('creates ADD_TODO_SUCCESS when fetching add todo has been done', () => {
     fetchMock
-      .postOnce('/api/todos/', {body: {todo: ''}, headers: {'content-type': 'application/json' }})
+      .postOnce('/api/todos/', {body: {todo: ''}, headers: header})
 
     const expectedActions = [
       {type: 'ADD_TODO_SUCCESS', todo: {todo: ''}}
@@ -75,18 +67,10 @@ describe('async actions', () => {
       expect(store.getActions()).toEqual(expectedActions)
     })
   })
-})
-
-
-describe('async actions', () => {
-  afterEach(() => {
-    fetchMock.reset()
-    fetchMock.restore()
-  })
 
   it('creates LOAD_TODO_SUCCESS when fetching load todos has been done', () => {
     fetchMock
-      .getOnce('/api/todos/', {body: {todos: []}, headers: {'content-type': 'application/json' }})
+      .getOnce('/api/todos/', {body: {todos: []}, headers: header})
 
     const expectedActions = [
       {type: 'LOAD_TODO_SUCCESS', todos:{todos: []}}
