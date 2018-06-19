@@ -14,7 +14,7 @@ class TodoList extends React.Component {
     return (
       <div className="main text-center">
         {this.props.todos.map(todo => <TodoListRow key={todo.id} todo={todo} />)}
-       </div>
+      </div>
     );
   }
 }
