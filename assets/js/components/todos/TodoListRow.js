@@ -7,6 +7,7 @@ import AddTaskForm from '../tasks/AddTaskForm';
 import TaskList from '../tasks/TaskList';
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
+import ModalTask from '../tasks/ModalTask';
 
 
 class TodoListRow extends React.Component {
@@ -16,6 +17,7 @@ class TodoListRow extends React.Component {
         data: undefined,
         newName: undefined,
         update: false,
+        show_modal_task: false
       };
     this.subDeleteTodo = this.subDeleteTodo.bind(this);
     this.toEditTodo = this.toEditTodo.bind(this);
@@ -60,22 +62,21 @@ class TodoListRow extends React.Component {
   }
 
   render() {
+    let lgClose = () => this.setState({ show_modal_task: false });
     return (
       <div>
         <h2>{this.props.todo.name}</h2>
         <Button type="submit" onClick={this.subDeleteTodo}>Remove</Button>
         {this.editForm()}
 
-        <Popup trigger={<Button>New Task</Button>} position="top left">
-          {close => (
-            <div>
-              <AddTaskForm todo={this.props.todo} />
-              <a className="close" onClick={close}>Cancel</a>
-            </div>
-          )}
-        </Popup>
-
         <TaskList tasks={this.props.todo.tasks} todo={this.props.todo} />
+
+        <Button
+          type="submit"
+          onClick={() => this.setState({ show_modal_task: true })}
+        >New Task
+        </Button>
+          <ModalTask show={this.state.show_modal_task} onHide={lgClose} todo={this.props.todo}/>
       </div>
     )
   }
