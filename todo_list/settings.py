@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'todo_list.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE')
+        default=config('DATABASE_URL')
     )
 }
 
