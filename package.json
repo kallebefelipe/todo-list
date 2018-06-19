@@ -7,6 +7,7 @@
     "live-server": "live-server public/",
     "dev-server": "webpack-dev-server --inline --content-base . --history-api-fallback",
     "test": "jest",
+    "build": "webpack --watch",
     "postinstall": "npm run build"
   },
   "repository": {
