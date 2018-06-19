@@ -13,7 +13,7 @@ class TaskListRow extends React.Component {
     this.state = {
       data: undefined,
       newName: undefined,
-      update: false,
+      update: false
     };
   }
 
@@ -29,8 +29,8 @@ class TaskListRow extends React.Component {
     }
 
   editForm = (event) => {
-    return <div className="edit-task">
-      <Popup trigger={<Button>Edit</Button>} position="top left">
+    return <Popup trigger={<Button>Edit</Button>}
+        position="top left">
         {close => (
           <div>
             <AddTaskForm todo={this.props.todo} task={this.props.task} />
@@ -38,7 +38,6 @@ class TaskListRow extends React.Component {
           </div>
         )}
       </Popup>
-    </div>
   }
 
   updateDoneTask = (event) => {
