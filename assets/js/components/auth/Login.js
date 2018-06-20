@@ -14,7 +14,8 @@ class Login extends React.Component {
     username: '',
     password: '',
     token: '',
-    isAuthenticated: false
+    isAuthenticated: false,
+    submited: false
   }
 
   handleSubmit = (e) => {
@@ -23,6 +24,13 @@ class Login extends React.Component {
       username: this.state.username,
       password: this.state.password
     });
+    this.setState(() => ({submited: true}))
+  }
+
+  showMessage = (authenticated) => {
+    if (this.state.submited && !authenticated) {
+      return <p className="lgn_invalid">Usename or login invalid.</p>
+    }
   }
 
   render() {
@@ -32,6 +40,7 @@ class Login extends React.Component {
     return (
       <div className="auth">
         <Form horizontal>
+          {this.showMessage(this.props.isAuthenticated)}
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={2}>
             Login
@@ -59,7 +68,7 @@ class Login extends React.Component {
             <Button type="submit" onClick={this.handleSubmit}>Login</Button>
             <Button type="submit" onClick={(e) => (e.preventDefault())}>
             <Link to="/register">Register</Link></Button>
-            <p>Forgot your <Link to="/forgot-password">password ?</Link></p>
+            <p className="fgt-ask">Forgot your <Link to="/forgot-password">password ?</Link></p>
             </Col>
           </FormGroup>
         </Form>
