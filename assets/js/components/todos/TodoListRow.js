@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { deleteTodo } from '../../actions/todos';
 import { updateTodo } from '../../actions/todos';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import AddTaskForm from '../tasks/AddTaskForm';
 import TaskList from '../tasks/TaskList';
 import {Link} from "react-router-dom";
@@ -57,16 +57,20 @@ class TodoListRow extends React.Component {
       );
     }
     return (
-      <Button type="submit" onClick={this.toEditTodo}>Edit</Button>
+      <Button type="submit" onClick={this.toEditTodo}>
+        <Glyphicon glyph="glyphicon glyphicon-pencil" />
+      </Button>
     )
   }
 
   render() {
     let lgClose = () => this.setState({ show_modal_task: false });
     return (
-      <div>
+      <div className="todo">
         <h2>{this.props.todo.name}</h2>
-        <Button type="submit" onClick={this.subDeleteTodo}>Remove</Button>
+        <Button type="submit" onClick={this.subDeleteTodo}>
+          <Glyphicon glyph="glyphicon glyphicon-trash" />
+        </Button>
         {this.editForm()}
 
         <TaskList tasks={this.props.todo.tasks} todo={this.props.todo} />
@@ -74,7 +78,8 @@ class TodoListRow extends React.Component {
         <Button
           type="submit"
           onClick={() => this.setState({ show_modal_task: true })}
-        >New Task
+        >
+          <Glyphicon glyph="glyphicon glyphicon-plus" />
         </Button>
           <ModalTask show={this.state.show_modal_task} onHide={lgClose} todo={this.props.todo}/>
       </div>
