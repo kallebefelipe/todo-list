@@ -11,16 +11,32 @@ class Register extends React.Component {
     username: '',
     password: '',
     token: '',
-    isAuthenticated: false
+    isAuthenticated: false,
+    erros: {
+      email: false,
+      username: false,
+      password: false
+    }
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log(this.state.username, 'username')
+    console.log(this.state.password, 'password')
+    console.log(this.state.email, 'email')
     this.props.mapRegisterUser({
       username: this.state.username,
       password: this.state.password,
       email: this.state.email,
     });
+
+    this.setState(() => ({
+      erros: {
+        email: this.state.email.length === 0,
+        username: this.state.username.length === 0,
+        password: this.state.password.length === 0,
+      }
+    }))
   }
 
   render() {
@@ -40,7 +56,8 @@ class Register extends React.Component {
               onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
               type="email"
               placeholder="Email"
-              name='email' />
+              className={this.state.erros.email ? "error" : ""}
+              name='email'/>
           </InputGroup>
         </FormGroup>
         <FormGroup controlId="formHorizontalEmail">
@@ -51,6 +68,7 @@ class Register extends React.Component {
             <FormControl
               onChange={(e) => {const value = e.target.value; this.setState(() => ({username: value}));}}
               type="login"
+              className={this.state.erros.username ? "error" : ""}
               placeholder="Login" />
           </Col>
         </FormGroup>
@@ -62,6 +80,7 @@ class Register extends React.Component {
           <FormControl
             onChange={(e) => {const value = e.target.value; this.setState(() => ({password: value}));}}
             type="password"
+            className={this.state.erros.password ? "error" : ""}
             placeholder="Password" />
           </Col>
         </FormGroup>
