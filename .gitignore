@@ -84,3 +84,6 @@ assets/js/bundle.js
 
 #redis
 redis-stable
+
+#snapshots
+__snapshots__/
