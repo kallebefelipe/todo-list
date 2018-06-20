@@ -344,3 +344,9 @@ td:last-child {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+.btn-task.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #fff;
+}
