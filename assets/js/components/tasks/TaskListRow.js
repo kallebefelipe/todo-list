@@ -1,7 +1,7 @@
 import AddTaskForm from '../tasks/AddTaskForm';
 import Popup from "reactjs-popup";
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getUsers } from '../../actions/user';
 import { updateTask, deleteTask } from '../../actions/tasks';
@@ -29,7 +29,8 @@ class TaskListRow extends React.Component {
     }
 
   editForm = (event) => {
-    return <Popup trigger={<Button>Edit</Button>}
+    return <Popup className="popup-task" trigger={
+          <Button className="btn-task"><Glyphicon glyph="glyphicon glyphicon-pencil" /></Button>}
         position="top left">
         {close => (
           <div>
@@ -71,7 +72,9 @@ class TaskListRow extends React.Component {
         <h6>Deadline: {this.props.task.deadline.split(' ')[0]}</h6>
         <h6>Assign: {this.getAssignName(this.props.task.user)}</h6>
 
-        <Button type="submit" onClick={(e) => this.deleteTask(e)}>Remove</Button>
+        <Button className="btn-task" type="submit" onClick={(e) => this.deleteTask(e)}>
+          <Glyphicon glyph="glyphicon glyphicon-trash" />
+        </Button>
         {this.editForm()}
       </li>
     )
