@@ -39,13 +39,21 @@ class Register extends React.Component {
     }))
   }
 
+  showMessage = () => {
+    if (this.props.registerFail) {
+      return <p className="lgn_invalid">User already exists or inválid email.</p>
+    }
+  }
+
   render() {
     if (this.props.isAuthenticated === true) {
       return <Redirect to='/' />
     }
+    console.log(this.props)
     return (
       <div className="auth">
       <Form horizontal>
+        {this.showMessage()}
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} sm={2}>
             Email
@@ -99,7 +107,8 @@ class Register extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.authReducer.isAuthenticated
+    isAuthenticated: state.authReducer.isAuthenticated,
+    registerFail: state.authReducer.registerFail,
   }
 }
 
