@@ -21,9 +21,7 @@ class Register extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.username, 'username')
-    console.log(this.state.password, 'password')
-    console.log(this.state.email, 'email')
+
     this.props.mapRegisterUser({
       username: this.state.username,
       password: this.state.password,
