@@ -14,8 +14,7 @@ app.autodiscover_tasks(lambda: [n.name for n in apps.get_app_configs()])
 app.conf.beat_schedule = {
     'send-email-every-day': {
         'task': 'todos.tasks.report_task',
-        # 'schedule': 86400.0
-        'schedule': 300.0
+        'schedule': 86400.0
     },
 }
 app.conf.timezone = 'America/Recife'
