@@ -42,13 +42,23 @@ class AddTaskForm extends React.Component {
         deadline: this.state.deadline},
         this.props.token);
     }
-
+    let len_name = this.state.name.length
+    let len_date = this.state.deadline.length
     this.setState(() => ({
       erros: {
-        name: this.state.name.length === 0,
-        date: this.state.deadline.length === 0,
+        name: len_name === 0,
+        date: len_date === 0,
       }
     }))
+
+    if (len_name != 0 && len_date != 0) {
+      if (this.props.onHide) {
+        this.props.onHide()
+      }
+      if (this.props.close) {
+        this.props.close()
+      }
+    }
   };
 
   updateDataValue = (e, data) => {
