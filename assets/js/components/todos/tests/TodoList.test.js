@@ -16,16 +16,16 @@ function setup() {
   const props = {
     fetchTodos: jest.fn(),
     token: 'Token',
-    todos: [{name: 'Todo 1'}]
+    todos: [{todo: {id: 1}}]
   }
   const header = {'content-type': 'application/json' }
-
+  const list_todos = [{name: 'todo 1'}]
   fetchMock
-      .getOnce('/api/todos/', {body: {todos: []}, headers: header})
+      .getOnce('/api/todos/', {body: [{id: 2}], headers: header})
 
   const enzymeWrapper = mount(
       <Provider store={store} >
-        <TodoList {...props} />
+        <TodoList {...props}/>
       </Provider>
     )
 
