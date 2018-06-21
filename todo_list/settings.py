@@ -170,5 +170,5 @@ EMAIL_USE_TLS = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-if not DEBUG:
+if not LOCAL:
     STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
