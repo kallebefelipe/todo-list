@@ -16,10 +16,12 @@ def send_email(user, tasks):
         'Web App Todo List Report', body, to=[user.email])
     email.send()
 
+    return email
+
 
 @task()
 def report_task():
-    start = datetime.datetime.today() - datetime.timedelta(1)
+    start = datetime.datetime.today() - datetime.timedelta(2)
     end = start + datetime.timedelta(days=1)
 
     users = models.User.objects.prefetch_related(
