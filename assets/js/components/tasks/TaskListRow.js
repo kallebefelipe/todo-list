@@ -34,7 +34,7 @@ class TaskListRow extends React.Component {
         position="top left">
         {close => (
           <div>
-            <AddTaskForm todo={this.props.todo} task={this.props.task} />
+            <AddTaskForm todo={this.props.todo} task={this.props.task} close={close}/>
             <a className="close" onClick={close}>Cancel</a>
           </div>
         )}
