@@ -45,6 +45,15 @@ describe('actions', () => {
     }
     expect(actions.logoutSuccess(response)).toEqual(expectedAction)
   })
+
+  it('should create an action to register fail', () => {
+    const data = {data: {}}
+    const expectedAction = {
+      type: 'REGISTER_USER_FAIL',
+      data
+    }
+    expect(actions.userRegisterFail(data)).toEqual(expectedAction)
+  })
 })
 
 
