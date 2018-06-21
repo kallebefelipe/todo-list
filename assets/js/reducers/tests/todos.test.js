@@ -118,5 +118,3 @@ describe('auth reducer', () => {
     )
   })
 })
-
-
