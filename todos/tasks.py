@@ -21,7 +21,7 @@ def send_email(user, tasks):
 
 @task()
 def report_task():
-    start = datetime.datetime.today() - datetime.timedelta(2)
+    start = datetime.datetime.today() - datetime.timedelta(1)
     end = start + datetime.timedelta(days=1)
 
     users = models.User.objects.prefetch_related(
