@@ -28,7 +28,7 @@ class Login extends React.Component {
   }
 
   showMessage = (authenticated) => {
-    if (this.state.submited && !authenticated) {
+    if (this.props.registerFail) {
       return <p className="lgn_invalid">Usename or login invalid.</p>
     }
   }
@@ -80,7 +80,8 @@ class Login extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.authReducer.isAuthenticated
+    isAuthenticated: state.authReducer.isAuthenticated,
+    registerFail: state.authReducer.registerFail,
   }
 }
 
