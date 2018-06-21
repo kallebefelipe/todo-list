@@ -14,7 +14,7 @@ class ModalTask extends React.Component {
           <Modal.Title id="contained-modal-title-lg">New Task</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <AddTaskForm todo={this.props.todo} />
+          <AddTaskForm todo={this.props.todo} onHide={this.props.onHide}/>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
