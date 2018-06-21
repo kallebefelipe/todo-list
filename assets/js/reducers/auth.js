@@ -5,39 +5,36 @@ const authState = {
   token: localStorage.getItem("token"),
   user: undefined,
   isAuthenticated: false,
+  registerFail: false
 }
 
 
-const userInfo = (action) => {
+const userInfo = (action, authenticated) => {
   return {
     token: action.data.token,
     email: action.data.user.email,
     username: action.data.user.username,
     user: action.data.user.id,
-    isAuthenticated: true,
-    status: action.status_code
+    isAuthenticated: authenticated,
+    status: action.status_code,
+    registerFail: action.data.registerFail
   };
 }
 
 
 const authReducer = (state= authState, action) => {
   switch(action.type) {
-    case 'REGISTER':
-      localStorage.setItem("token", action.data.token);
-      return {
-        token: action.token,
-        email: action.email,
-        username: action.username,
-      };
-      break;
     case 'LOGIN_USER_SUCCESS':
       localStorage.setItem("token", action.data.token);
-      return userInfo(action);
+      return userInfo(action, true);
     case 'REGISTER_USER_SUCCESS':
       localStorage.setItem("token", action.data.token);
-      return userInfo(action);
+      return userInfo(action, true);
+    case 'REGISTER_USER_FAIL':
+      debugger;
+      return userInfo(action, false);
     case 'FORGOT_PASSWORD_SUCCESS':
-      return userInfo(action);
+      return userInfo(action, false);
     case 'LOGOUT_SUCCESS':
       localStorage.removeItem("token");
       return {
@@ -46,7 +43,8 @@ const authReducer = (state= authState, action) => {
         username: '',
         user: '',
         isAuthenticated: false,
-        status: action.status_code
+        status: action.status_code,
+        registerFail: false
       }
     default:
         return state
