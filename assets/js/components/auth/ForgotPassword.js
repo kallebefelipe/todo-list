@@ -25,7 +25,6 @@ class ForgotPassword extends React.Component {
   }
 
   render () {
-    console.log(this.state.submited)
     return <div className="auth">
       <Form>
         <FormGroup>
