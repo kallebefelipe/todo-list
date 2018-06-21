@@ -6,7 +6,7 @@ from todos import models
 
 
 def send_email(user, tasks):
-    body = "Hello From Web App Todo App. Do you have the follows task for today:"
+    body = "Hello From Web App Todo App. You have the follows task for today:"
 
     for count, user_task in enumerate(tasks):
         body += '\n\n'+str(count+1) + ' Task: \n' + user_task.name + (

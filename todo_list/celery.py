@@ -15,7 +15,7 @@ app.conf.beat_schedule = {
     'send-email-every-day': {
         'task': 'todos.tasks.report_task',
         # 'schedule': 86400.0
-        'schedule': 60.0
+        'schedule': 300.0
     },
 }
-app.conf.timezone = 'UTC'
+app.conf.timezone = 'America/Recife'
