@@ -23,7 +23,7 @@ class AuthApi {
         },
       body: JSON.stringify(data)
       }).then((response) =>  {
-      return response.json();
+        return response.json();
       })
     }
 
