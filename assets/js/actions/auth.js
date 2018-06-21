@@ -11,6 +11,11 @@ export function userRegisterSuccess(data) {
 }
 
 
+export function userRegisterFail(data) {
+  return {type: 'REGISTER_USER_FAIL', data};
+}
+
+
 export function forgotPasswordSuccess(response) {
   return {type: 'FORGOT_PASSWORD_SUCCESS', response};
 }
@@ -25,7 +30,9 @@ const registerUser = function (user) {
   return function(dispatch) {
     return authApi.registerUser(user).then((user) => {
       dispatch(userRegisterSuccess(user));
-    })
+    }).catch(error => {
+      dispatch(userRegisterFail({registerFail: true, user: {}}))
+    });
   }
 };
 
@@ -34,7 +41,9 @@ const loginUser = function (user) {
   return function(dispatch) {
     return authApi.loginUser(user).then((user) => {
       dispatch(userLoginSuccess(user));
-    })
+    }).catch(error => {
+      dispatch(userRegisterFail({registerFail: true, user: {}}))
+    });
   }
 };
 
