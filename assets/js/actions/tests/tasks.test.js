@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import expect from 'expect';
 import * as actions from '../tasks';
+import * as types from '../../actionTypes';
 
 
 const middlewares = [thunk]
@@ -14,7 +15,7 @@ describe('actions', () => {
   it('should create an action to add task', () => {
     const data = {data: {}}
     const expectedAction = {
-      type: 'ADD_TASK_SUCCESS',
+      type: types.ADD_TASK_SUCCESS,
       data
     }
     expect(actions.addTaskSuccess(data)).toEqual(expectedAction)
@@ -23,7 +24,7 @@ describe('actions', () => {
   it('should create an action to update task', () => {
     const task = {data: {}}
     const expectedAction = {
-      type: 'UPDATE_TASK_SUCCESS',
+      type: types.UPDATE_TASK_SUCCESS,
       task
     }
     expect(actions.updateTaskSuccess(task)).toEqual(expectedAction)
@@ -32,7 +33,7 @@ describe('actions', () => {
   it('should create an action to delete task', () => {
     const data = {task: '', todo: {id: 'id'}}
     const expectedAction = {
-      type: 'DELETE_TASK_SUCCESS',
+      type: types.DELETE_TASK_SUCCESS,
       task: '', todo_id: 'id'}
     expect(actions.deleteTaskSuccess(data)).toEqual(expectedAction)
   })
