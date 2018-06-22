@@ -1,5 +1,5 @@
 import 'normalize.css/normalize.css';
-import Jsx from './components/routers';
+import Jsx from './routes';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import setUpStore from './store/configureStore';
