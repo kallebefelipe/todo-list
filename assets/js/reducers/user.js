@@ -1,3 +1,5 @@
+import * as types from '../actionTypes';
+
 
 const authState = {
     users: [],
@@ -6,7 +8,7 @@ const authState = {
 
 const userReducer = (state= authState, action) => {
   switch(action.type) {
-    case 'LOAD_USERS_SUCCESS':
+    case types.LOAD_USERS_SUCCESS:
       return {
         users: action.users
       };
