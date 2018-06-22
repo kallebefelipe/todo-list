@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { FormGroup, Form, ControlLabel,
   InputGroup, FormControl, Col, Button } from 'react-bootstrap';
 import { forgotPassword } from '../../actions/auth';
+import ForgotPasswordForm from '../../components/auth/ForgotPasswordForm';
 
 
 class ForgotPassword extends React.Component {
@@ -24,27 +25,19 @@ class ForgotPassword extends React.Component {
     }
   }
 
+  updateEmail = (e) => {
+    const value = e.target.value;
+    this.setState(() => ({email: value}));
+  }
+
   render () {
-    return <div className="auth">
-      <Form>
-        <FormGroup>
-          <InputGroup>
-            <InputGroup.Addon>@</InputGroup.Addon>
-            <FormControl
-              onChange={(e) => {const value = e.target.value; this.setState(() => ({email: value}));}}
-              type="email"
-              placeholder="Email"
-              name='email' />
-          </InputGroup>
-        </FormGroup>
-        <FormGroup>
-            <Col smOffset={2} sm={10} className="btn-forget">
-              <Button type="submit" onClick={(e) => (this.handleSubmit(e))}>Submit</Button>
-            </Col>
-            {this.showMessage()}
-          </FormGroup>
-      </Form>
-    </div>
+    return (
+     <ForgotPasswordForm
+      showMessage={this.showMessage}
+      updateEmail={this.updateEmail}
+      hdlSubmit={this.handleSubmit}
+     />
+    )
   }
 };
 

@@ -29,6 +29,7 @@ class TasksApi {
           user: data.user,
         })
       }).then((response) =>  {
+        console.log(response)
         return response.json();
       })
     }

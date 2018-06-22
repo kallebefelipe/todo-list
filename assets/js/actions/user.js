@@ -1,8 +1,9 @@
 import userApi from '../api/UserApi';
+import * as types from '../actionTypes';
 
 
 export function getUsersSuccess(data) {
-  return {type: 'LOAD_USERS_SUCCESS', users: data};
+  return {type: types.LOAD_USERS_SUCCESS, users: data};
 }
 
 

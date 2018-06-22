@@ -1,14 +1,15 @@
 import taskApi from '../api/TasksApi';
+import * as types from '../actionTypes';
 
 
 export function addTaskSuccess(data) {
-  return {type: 'ADD_TASK_SUCCESS', data};
+  return {type: types.ADD_TASK_SUCCESS, data};
 }
 
 
 export function updateTaskSuccess(data) {
   return {
-    type: 'UPDATE_TASK_SUCCESS',
+    type: types.UPDATE_TASK_SUCCESS,
     task: data
   };
 }
@@ -16,7 +17,7 @@ export function updateTaskSuccess(data) {
 
 export function deleteTaskSuccess(data) {
   return {
-    type: 'DELETE_TASK_SUCCESS',
+    type: types.DELETE_TASK_SUCCESS,
     task: data.task,
     todo_id: data.todo.id,
   };

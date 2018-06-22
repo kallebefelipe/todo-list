@@ -1,10 +1,11 @@
-import AddTaskForm from '../tasks/AddTaskForm';
+import AddTask from '../tasks/AddTask';
 import Popup from "reactjs-popup";
 import React from 'react';
 import { Button, Glyphicon } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { getUsers } from '../../actions/user';
 import { updateTask, deleteTask } from '../../actions/tasks';
+import TaskRow from '../../components/tasks/TaskRow';
 
 
 class TaskListRow extends React.Component {
@@ -34,7 +35,7 @@ class TaskListRow extends React.Component {
         position="top left">
         {close => (
           <div>
-            <AddTaskForm todo={this.props.todo} task={this.props.task} close={close}/>
+            <AddTask todo={this.props.todo} task={this.props.task} close={close}/>
             <a className="close" onClick={close}>Cancel</a>
           </div>
         )}
@@ -59,24 +60,14 @@ class TaskListRow extends React.Component {
   }
 
   render() {
-    let task_name = this.props.task.name
     return (
-      <li className="responded">
-        <span>{this.props.task.done ? <strike>{task_name}</strike> : task_name}</span>
-        <label>
-          <input type="checkbox"
-            checked={this.props.task.done}
-            onChange={(e) => {const value = e.target.value; this.updateDoneTask(value);}}
-            />Done
-        </label>
-        <h6>Deadline: {this.props.task.deadline.split(' ')[0]}</h6>
-        <h6>Assign: {this.getAssignName(this.props.task.user)}</h6>
-
-        <Button className="btn-task" type="submit" onClick={(e) => this.deleteTask(e)}>
-          <Glyphicon glyph="glyphicon glyphicon-trash" />
-        </Button>
-        {this.editForm()}
-      </li>
+      <TaskRow
+        task={this.props.task}
+        getAssignName={this.getAssignName}
+        deleteTask={this.deleteTask}
+        editForm={this.editForm}
+        updateDoneTask={this.updateDoneTask}
+      />
     )
   }
 };

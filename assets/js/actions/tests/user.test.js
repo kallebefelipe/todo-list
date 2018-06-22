@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import expect from 'expect';
 import * as actions from '../user';
+import * as types from '../../actionTypes';
 
 
 const middlewares = [thunk]
@@ -14,7 +15,7 @@ describe('actions', () => {
   it('should create an action to load users', () => {
     const users = {users: []}
     const expectedAction = {
-      type: 'LOAD_USERS_SUCCESS',
+      type: types.LOAD_USERS_SUCCESS,
       users
     }
     expect(actions.getUsersSuccess(users)).toEqual(expectedAction)

@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { deleteTodo } from '../../actions/todos';
 import { updateTodo } from '../../actions/todos';
 import { Button, Glyphicon } from 'react-bootstrap';
-import AddTaskForm from '../tasks/AddTaskForm';
-import TaskList from '../tasks/TaskList';
+import TaskListRow from '../tasks/TaskListRow';
 import {Link} from "react-router-dom";
 import Popup from "reactjs-popup";
-import ModalTask from '../tasks/ModalTask';
+import ModalTask from '../../components/tasks/ModalTask';
+import TodoRow from '../../components/todos/TodoRow';
 
 
 class TodoListRow extends React.Component {
@@ -17,7 +17,7 @@ class TodoListRow extends React.Component {
         data: undefined,
         newName: undefined,
         update: false,
-        show_modal_task: false
+        showModalTask: false
       };
     this.subDeleteTodo = this.subDeleteTodo.bind(this);
     this.toEditTodo = this.toEditTodo.bind(this);
@@ -43,6 +43,10 @@ class TodoListRow extends React.Component {
     this.setState(() => ({update: false}));
   };
 
+  updateShowModal = () => {
+    this.setState({ showModalTask: true })
+  }
+
   editForm(event) {
     if (this.state.update) {
       return (
@@ -64,25 +68,17 @@ class TodoListRow extends React.Component {
   }
 
   render() {
-    let lgClose = () => this.setState({ show_modal_task: false });
+    let lgClose = () => this.setState({ showModalTask: false });
     return (
-      <div className="todo">
-        <h2>{this.props.todo.name}</h2>
-        <Button type="submit" onClick={this.subDeleteTodo}>
-          <Glyphicon glyph="glyphicon glyphicon-trash" />
-        </Button>
-        {this.editForm()}
+      <TodoRow
+        todo={this.props.todo}
+        subDeleteTodo={this.subDeleteTodo}
+        lgClose={lgClose}
+        editForm={this.editForm}
+        updateShowModal={this.updateShowModal}
+        showModalTask={this.state.showModalTask}
 
-        <TaskList tasks={this.props.todo.tasks} todo={this.props.todo} />
-
-        <Button
-          type="submit"
-          onClick={() => this.setState({ show_modal_task: true })}
-        >
-          <Glyphicon glyph="glyphicon glyphicon-plus" />
-        </Button>
-          <ModalTask show={this.state.show_modal_task} onHide={lgClose} todo={this.props.todo}/>
-      </div>
+      / >
     )
   }
 };

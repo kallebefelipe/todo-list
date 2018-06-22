@@ -1,4 +1,5 @@
 import todosReducer from '../todos'
+import * as types from '../../actionTypes';
 
 
 describe('auth reducer', () => {
@@ -13,7 +14,7 @@ describe('auth reducer', () => {
   it('should handle POPULATE_INITIAL_STATE', () => {
     expect(
       todosReducer([], {
-        type: 'POPULATE_INITIAL_STATE',
+        type: types.POPULATE_INITIAL_STATE,
         data: [],
       })
     ).toEqual(
@@ -26,7 +27,7 @@ describe('auth reducer', () => {
   it('should handle ADD_TODO_SUCCESS', () => {
     expect(
       todosReducer({todos: []}, {
-        type: 'ADD_TODO_SUCCESS',
+        type: types.ADD_TODO_SUCCESS,
         todo: {},
       })
     ).toEqual(
@@ -39,7 +40,7 @@ describe('auth reducer', () => {
   it('should handle LOAD_TODO_SUCCESS', () => {
     expect(
       todosReducer({}, {
-        type: 'LOAD_TODO_SUCCESS',
+        type: types.LOAD_TODO_SUCCESS,
         todos: [{}],
       })
     ).toEqual(
@@ -52,7 +53,7 @@ describe('auth reducer', () => {
   it('should handle DELETE_TODO_SUCCESS', () => {
     expect(
       todosReducer({todos:[{id: 1}]}, {
-        type: 'DELETE_TODO_SUCCESS',
+        type: types.DELETE_TODO_SUCCESS,
         todo: {id: 1},
       })
     ).toEqual(
@@ -65,7 +66,7 @@ describe('auth reducer', () => {
   it('should handle UPDATE_TODO_SUCCESS', () => {
     expect(
       todosReducer({todos:[{id: 1, name: 'test'}]}, {
-        type: 'UPDATE_TODO_SUCCESS',
+        type: types.UPDATE_TODO_SUCCESS,
         todo: {id: 1, name: 'new_name'},
       })
     ).toEqual(
@@ -78,7 +79,7 @@ describe('auth reducer', () => {
   it('should handle ADD_TASK_SUCCESS', () => {
     expect(
       todosReducer({todos:[{id: 1, name: 'test', tasks: []}]}, {
-        type: 'ADD_TASK_SUCCESS',
+        type: types.ADD_TASK_SUCCESS,
         data: {name: 'new_task', todo:  1}
         },
       )
@@ -92,7 +93,7 @@ describe('auth reducer', () => {
   it('should handle UPDATE_TASK_SUCCESS', () => {
     expect(
       todosReducer({todos:[{id: 1, name: 'test', tasks: [{name: 'name', todo:  1, id: 1}]}]}, {
-        type: 'UPDATE_TASK_SUCCESS',
+        type: types.UPDATE_TASK_SUCCESS,
         task: {name: 'new_name', todo:  1, id: 1}
         },
       )
@@ -106,7 +107,7 @@ describe('auth reducer', () => {
   it('should handle DELETE_TASK_SUCCESS', () => {
     expect(
       todosReducer({todos:[{id: 1, name: 'test', tasks: [{name: 'name', todo:  1, id: 1}]}]}, {
-        type: 'DELETE_TASK_SUCCESS',
+        type: types.DELETE_TASK_SUCCESS,
         todo_id: 1,
         task: {id: 1}
         },
