@@ -1,9 +1,9 @@
-import AddTaskForm from './tasks/AddTaskForm';
-import ForgotPassword from './auth/ForgotPassword';
-import Login from './auth/Login';
+import AddTaskForm from '../containers/tasks/AddTask';
+import ForgotPassword from '../containers/auth/ForgotPassword';
+import Login from '../containers/auth/Login';
 import React from 'react';
-import Register from './auth/Register';
-import TodoApp from './TodoApp';
+import Register from '../containers/auth/Register';
+import TodoApp from '../containers/TodoApp';
 import { connect } from 'react-redux';
 import { Route, Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
