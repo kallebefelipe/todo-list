@@ -1,4 +1,4 @@
-
+import * as types from '../../actionTypes';
 import authReducer from '../auth'
 
 
@@ -19,7 +19,7 @@ describe('auth reducer', () => {
   it('should handle LOGIN_USER_SUCCESS', () => {
     expect(
       authReducer({}, {
-        type: 'LOGIN_USER_SUCCESS',
+        type: types.LOGIN_USER_SUCCESS,
         data: {
           user: {
           username: 'user',
@@ -43,7 +43,7 @@ describe('auth reducer', () => {
   it('should handle REGISTER_USER_SUCCESS', () => {
     expect(
       authReducer({}, {
-        type: 'REGISTER_USER_SUCCESS',
+        type: types.REGISTER_USER_SUCCESS,
         data: {
           user: {
             email: 'email',
@@ -68,7 +68,7 @@ describe('auth reducer', () => {
   it('should handle FORGOT_PASSWORD_SUCCESS', () => {
     expect(
       authReducer({}, {
-        type: 'FORGOT_PASSWORD_SUCCESS',
+        type: types.FORGOT_PASSWORD_SUCCESS,
         data: {
           user: {
             email: 'email@email.com',
@@ -92,7 +92,7 @@ describe('auth reducer', () => {
   it('should handle LOGOUT_SUCCESS', () => {
     expect(
       authReducer({}, {
-        type: 'LOGOUT_SUCCESS'
+        type: types.LOGOUT_SUCCESS
         },
       )
     ).toEqual(
