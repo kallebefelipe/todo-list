@@ -1,28 +1,29 @@
 import authApi from '../api/AuthApi';
+import * as types from '../actionTypes';
 
 
 export function userLoginSuccess(data) {
-  return {type: 'LOGIN_USER_SUCCESS', data};
+  return {type: types.LOGIN_USER_SUCCESS, data};
 }
 
 
 export function userRegisterSuccess(data) {
-  return {type: 'REGISTER_USER_SUCCESS', data};
+  return {type: types.REGISTER_USER_SUCCESS, data};
 }
 
 
 export function userRegisterFail(data) {
-  return {type: 'REGISTER_USER_FAIL', data};
+  return {type: types.REGISTER_USER_FAIL, data};
 }
 
 
 export function forgotPasswordSuccess(response) {
-  return {type: 'FORGOT_PASSWORD_SUCCESS', response};
+  return {type: types.FORGOT_PASSWORD_SUCCESS, response};
 }
 
 
 export function logoutSuccess(response) {
-  return {type: 'LOGOUT_SUCCESS', response};
+  return {type: types.LOGOUT_SUCCESS, response};
 }
 
 
