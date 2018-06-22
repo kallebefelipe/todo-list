@@ -7,6 +7,7 @@ import { Redirect } from 'react-router';
 import { Route } from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import {Link} from "react-router-dom";
+import LoginForm from '../../components/auth/LoginForm';
 
 
 class Login extends React.Component {
@@ -33,46 +34,26 @@ class Login extends React.Component {
     }
   }
 
+  updateState = (e, field) => {
+    const value = e.target.value;
+    if (field === 'login') {
+      this.setState(() => ({username: value}));
+    }else{
+      this.setState(() => ({password: value}));
+    }
+  }
+
   render() {
     if (this.props.isAuthenticated === true) {
       return <Redirect to='/' />
     }
     return (
-      <div className="auth">
-        <Form horizontal>
-          {this.showMessage(this.props.isAuthenticated)}
-        <FormGroup controlId="formHorizontalEmail">
-          <Col componentClass={ControlLabel} sm={2}>
-            Login
-          </Col>
-          <Col sm={10}>
-            <FormControl
-              onChange={(e) => {const value = e.target.value; this.setState(() => ({username: value}));}}
-              type="login"
-              placeholder="Login" />
-          </Col>
-        </FormGroup>
-        <FormGroup controlId="formHorizontalPassword">
-          <Col componentClass={ControlLabel} sm={2}>
-            Password
-          </Col>
-          <Col sm={10}>
-          <FormControl
-            onChange={(e) => {const value = e.target.value; this.setState(() => ({password: value}));}}
-            type="password"
-            placeholder="Password" />
-          </Col>
-        </FormGroup>
-        <FormGroup>
-            <Col smOffset={2} sm={10}>
-            <Button type="submit" onClick={this.handleSubmit}>Login</Button>
-            <Button type="submit" onClick={(e) => (e.preventDefault())}>
-            <Link to="/register">Register</Link></Button>
-            <p className="fgt-ask">Forgot your <Link to="/forgot-password">password ?</Link></p>
-            </Col>
-          </FormGroup>
-        </Form>
-      </div>
+      <LoginForm
+        showMessage={this.showMessage}
+        isAuthenticated={this.isAuthenticated}
+        updateState={this.updateState}
+        handleSubmit={this.handleSubmit}
+      />
     );
   }
 };
