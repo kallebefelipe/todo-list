@@ -1,0 +1,4 @@
+REDIS_URL=redis://localhost:6379/0
+EMAIL_HOST_PASSWORD=
+DATABASE_URL=postgres://sample:sample@localhost:5555/todo_list
+LOCAL=TRUE
