@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 import expect from 'expect';
 import * as actions from '../auth';
+import * as types from '../../actionTypes';
 
 
 const middlewares = [thunk]
@@ -13,7 +14,7 @@ describe('actions', () => {
   it('should create an action to login user', () => {
     const data = {user: {}}
     const expectedAction = {
-      type: 'LOGIN_USER_SUCCESS',
+      type: types.LOGIN_USER_SUCCESS,
       data
     }
     expect(actions.userLoginSuccess(data)).toEqual(expectedAction)
@@ -22,7 +23,7 @@ describe('actions', () => {
   it('should create an action to register user', () => {
     const data = {user: {}}
     const expectedAction = {
-      type: 'REGISTER_USER_SUCCESS',
+      type: types.REGISTER_USER_SUCCESS,
       data
     }
     expect(actions.userRegisterSuccess(data)).toEqual(expectedAction)
@@ -31,7 +32,7 @@ describe('actions', () => {
   it('should create an action to forgot password', () => {
     const response = {response: {}}
     const expectedAction = {
-      type: 'FORGOT_PASSWORD_SUCCESS',
+      type: types.FORGOT_PASSWORD_SUCCESS,
       response
     }
     expect(actions.forgotPasswordSuccess(response)).toEqual(expectedAction)
@@ -40,7 +41,7 @@ describe('actions', () => {
   it('should create an action to logout success', () => {
     const response = {response: {}}
     const expectedAction = {
-      type: 'LOGOUT_SUCCESS',
+      type: types.LOGOUT_SUCCESS,
       response
     }
     expect(actions.logoutSuccess(response)).toEqual(expectedAction)
@@ -49,7 +50,7 @@ describe('actions', () => {
   it('should create an action to register fail', () => {
     const data = {data: {}}
     const expectedAction = {
-      type: 'REGISTER_USER_FAIL',
+      type: types.REGISTER_USER_FAIL,
       data
     }
     expect(actions.userRegisterFail(data)).toEqual(expectedAction)

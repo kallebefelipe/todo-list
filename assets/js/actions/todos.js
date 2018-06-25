@@ -1,28 +1,29 @@
 import todoApi from '../api/TodosApi';
+import * as types from '../actionTypes';
 
 
 export function deleteTodoSuccess(todo) {
-  return {type: 'DELETE_TODO_SUCCESS', todo};
+  return {type: types.DELETE_TODO_SUCCESS, todo};
 }
 
 
 export function addTodoSuccess(todo) {
-  return {type: 'ADD_TODO_SUCCESS', todo};
+  return {type: types.ADD_TODO_SUCCESS, todo};
 }
 
 
 export function loadTodoSuccess(todos) {
-  return {type: 'LOAD_TODO_SUCCESS', todos};
+  return {type: types.LOAD_TODO_SUCCESS, todos};
 }
 
 
 export function updateTodoSuccess(todo) {
-  return {type: 'UPDATE_TODO_SUCCESS', todo};
+  return {type: types.UPDATE_TODO_SUCCESS, todo};
 }
 
 
 const populateInitialState = (data) => ({
-  type: 'POPULATE_INITIAL_STATE',
+  type: types.POPULATE_INITIAL_STATE,
   data: data
 });
 

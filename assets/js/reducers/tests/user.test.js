@@ -1,4 +1,5 @@
 import userReducer from '../user'
+import * as types from '../../actionTypes';
 
 
 describe('user reducer', () => {
@@ -13,7 +14,7 @@ describe('user reducer', () => {
   it('should handle LOAD_USERS_SUCCESS', () => {
     expect(
       userReducer({}, {
-        type: 'LOAD_USERS_SUCCESS',
+        type: types.LOAD_USERS_SUCCESS,
         users: [],
       })
     ).toEqual(

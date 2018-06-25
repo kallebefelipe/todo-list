@@ -1,3 +1,5 @@
+import * as types from '../actionTypes';
+
 
 const authState = {
   username: '',
@@ -24,17 +26,17 @@ const userInfo = (action, authenticated) => {
 
 const authReducer = (state= authState, action) => {
   switch(action.type) {
-    case 'LOGIN_USER_SUCCESS':
+    case types.LOGIN_USER_SUCCESS:
       localStorage.setItem("token", action.data.token);
       return userInfo(action, true);
-    case 'REGISTER_USER_SUCCESS':
+    case types.REGISTER_USER_SUCCESS:
       localStorage.setItem("token", action.data.token);
       return userInfo(action, true);
-    case 'REGISTER_USER_FAIL':
+    case types.REGISTER_USER_FAIL:
       return userInfo(action, false);
-    case 'FORGOT_PASSWORD_SUCCESS':
+    case types.FORGOT_PASSWORD_SUCCESS:
       return userInfo(action, false);
-    case 'LOGOUT_SUCCESS':
+    case types.LOGOUT_SUCCESS:
       localStorage.removeItem("token");
       return {
         token: '',
