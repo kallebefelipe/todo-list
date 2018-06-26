@@ -14,11 +14,15 @@ npm install
 
 https://redis.io/topics/quickstart
 
+### Configurando banco no PostgreSql:
+
+É necessário criar um banco com o nome de `todo_list`
+
 ### Configurando .env
 
 Criar .env como o example_env no root do projeto
 
-É necessário configurar o REDIS_URL
+É necessário configurar o REDIS_URL e o DATABASE_URL com a url do banco do PostgreSql
 
 ### Rodando migrações
 
