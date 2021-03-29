@@ -42,7 +42,7 @@ psycopg2==2.7.5
 ptyprocess==0.5.2
 py==1.5.3
 pycparser==2.18
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.6.4
 pyOpenSSL==18.0.0
 pytest==3.6.1
